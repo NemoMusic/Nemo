@@ -102,11 +102,25 @@ create_share_table = """create table share(
             foreign key (activity_id) references activity(id))engine = INNODB;"""
 
 
-create_follow_table = """create table follow(
-		activity_id int not null ,
-		primary key (activity_id),
-		foreign key (activity_id) references activity(id))engine = INNODB;"""
+create_follow_table ="""create table follow(
+            activity_id int NOT NULL,
+            FOREIGN KEY (activity_id) REFERENCES activity(id),
+            PRIMARY KEY (activity_id)
+) engine = INNODB;"""
 
+create_rate_table ="""create table rate(
+            activity_id int NOT NULL,
+            value int NOT NULL,
+            FOREIGN KEY (activity_id) REFERENCES album(id),
+            PRIMARY KEY (activity_id)
+) engine = INNODB;"""
+
+create_comment_table ="""create table comment(
+            activity_id int NOT NULL,
+            text  VARCHAR(50) NOT NULL,
+            FOREIGN KEY (activity_id) REFERENCES album(id),
+            PRIMARY KEY (activity_id)
+) engine = INNODB;"""
 
 create_user_follow = """create table user_follow(
             follower_id   int not null,
