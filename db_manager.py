@@ -51,7 +51,7 @@ create_artist_table = """create table artist(
 		    foreign key (user_id) references user(id)) engine = INNODB;"""
 
 
-create_playlist_table ="""create table playlist(
+create_playlist_table = """create table playlist(
             id              varchar(10)  not null auto_increment,
             title           varchar(20) not null,
             create_date     date(20),
@@ -61,7 +61,7 @@ create_playlist_table ="""create table playlist(
             foreign key (user_id) references user(id)) engine = INNODB;"""
 
 
-create_album_table="""create table album(
+create_album_table = """create table album(
             id		        varchar(10)  not null auto_increment,
             title			varchar(20) not null,
             release_date	date(20),
@@ -108,76 +108,75 @@ create_follow_table = """create table follow(
 		foreign key (activity_id) references activity(id))engine = INNODB;"""
 
 
-
 create_user_follow = """create table user_follow(
             follower_id  int not null,
             following_id  int not null,
             primary key (follower_id, following_id ),
-            foreign key follower_id references User(ID)
+            foreign key follower_id references user(ID)
             on delete cascade on update cascade,
-            foreign key following_id references User(ID) 
-            on delete cascade on update cascade);"""
+            foreign key following_id references user(ID) 
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_user_song = """create table user_song(
             user_id   int not null,
             song_id   int not null,
-            primary key (follower_id, following_id ),
-            foreign key user_id references User(ID)
+            primary key (user_id,song_id),
+            foreign key user_id references user(ID)
             on delete cascade on update cascade,
-            foreign key song_id references Song(ID)
-            on delete cascade on update cascade);"""
+            foreign key song_id references song(ID)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_user_album = """create table user_album(
             user_id       int not null,
             album_id      int not null,
             primary key (user_id, album_id ),
-            foreign key user_id references User(id)
+            foreign key user_id references user(id)
             on delete cascade on update cascade,
-            foreign key album_id references Album(id)
-            on delete cascade on update cascade);"""
+            foreign key album_id references album(id)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_artist_song = """create table artist_song(
             user_id  int not null,
             song_id  int not null,
-            primary key (user_id, album_id ),
-            foreign key user_id references Artist(user_id)
+            primary key (user_id,song_id),
+            foreign key user_id references artist(user_id)
             on delete cascade on update cascade,
-            foreign key album_id references Album(id)
-            on delete cascade on update cascade);"""
+            foreign key album_id references album(id)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_participation = """create table participation(
             user_id       varchar(10) not null,
             artist_id     varchar(10) not null,
             event_id      varchar(10),
             primary key (user_id,artist_id,event_id),
-            foreign key(user_id) references User(id)
+            foreign key(user_id) references user(id)
             on delete cascade on update cascade,
-            foreign key(artist_id) references Artist(user_id)
+            foreign key(artist_id) references artist(user_id)
             on delete cascade on update cascade,
-            foreign key(event_id) references Event(id)
-            on delete cascade on update cascade);"""
+            foreign key(event_id) references event(id)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_playlist_song = """create table playlist_song(
             song_id       varchar(10) not null,
             playlist_id   varchar(10) not null,
             primary key (song_id, playlist_id),
-            foreign key(song_id) references Song(id)
+            foreign key(song_id) references song(id)
             on delete cascade on update cascade,
-            foreign key(playlist_id) references Playlist(id)
-            on delete cascade on update cascade);"""
+            foreign key(playlist_id) references playlist(id)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_comment_reply = """create table comment_reply(
             reply_id    varchar(10) not null,
             parent_id   varchar(10) not null,
             primary key (reply_id),
-            foreign key(parent_id) references Comment(activity_id)
-            on delete cascade on update cascade);"""
+            foreign key(parent_id) references comment(activity_id)
+            on delete cascade on update cascade) engine = INNODB;"""
 
 create_table_song_genre = """create table song_genre(
             song_id     varchar(10) not null,
             genre_name  varchar(10) not null,
             primary key (song_id, genre_name),
-            foreign key(song_id) references Song(id)
+            foreign key(song_id) references song(id)
             on delete cascade on update cascade,
-            foreign key(genre_name) references Genre(name)
-            on delete cascade on update cascade);"""
+            foreign key(genre_name) references genre(name)
+            on delete cascade on update cascade) engine = INNODB;"""
