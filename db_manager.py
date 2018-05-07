@@ -54,7 +54,7 @@ create_artist_table = """create table artist(
 create_playlist_table = """create table playlist(
             id              varchar(10)  not null auto_increment,
             title           varchar(20) not null,
-            create_date     date(20),
+            create_date     date,
             is_private      varchar(10) not null,
             user_id         varchar(20) not null,
             primary key (id),
@@ -64,7 +64,7 @@ create_playlist_table = """create table playlist(
 create_album_table = """create table album(
             id		        varchar(10)  not null auto_increment,
             title			varchar(20) not null,
-            release_date	date(20),
+            release_date	date,
             price			int not null,
             primary key (id)) engine = INNODB;"""
 
@@ -72,7 +72,7 @@ create_album_table = """create table album(
 create_song_table = """create table song(
             id			    varchar(10)  not null auto_increment,
             title			varchar(20) not null,
-            release_date	date(20) not null,
+            release_date	date not null,
             duration		time(5) not null,
             number_of_listen	int,
             price			int,
@@ -88,7 +88,7 @@ create_genre_table = """create table genre(
 
 create_activity_table = """create table activity(
             id			    varchar(10) not null auto_increment,
-            date			date(10) not null,
+            date			date not null,
             entitiy_type	varchar(5) not null,
             action_type		varchar(5) not null,
             user_id 		varchar(10) not null,
