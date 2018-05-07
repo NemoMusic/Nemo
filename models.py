@@ -58,16 +58,35 @@ class Event:
         self.about = about
 
 
-class Share:
+class Activity:
 
-    def __init__(self, activity_id, date, share_comment):
+    def __init__(self, activity_id, date, entity_type, action_type):
         self.activity_id = activity_id
         self.date = date
+        self.entity_type = entity_type
+        self.action_type = action_type
+
+
+class Share:
+
+    def __init__(self, activity_id, date, entity_type, action_type, share_comment):
+        Activity.__init__(activity_id ,date, entity_type, action_type)
         self.share_comment = share_comment
 
 
-#class Follow:
-#    def __init__(self, activity_id, date):
+class Rate:
+    def __init__(self, activity_id, date, entity_type, action_type, rate):
+        Activity.__init__(activity_id, date, entity_type, action_type)
+        self.rate = rate
+
+
+class Comment:
+    def __init__(self, activity_id, date, entity_type, action_type, text, parent_id, reply_list):
+        Activity.__init__(activity_id, date, entity_type, action_type)
+        self.text = text
+        self.parent_id = parent_id
+        self.reply_list = reply_list
+
 
 
 
