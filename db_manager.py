@@ -109,5 +109,75 @@ create_follow_table = """create table follow(
 
 
 
+create_user_follow = """create table user_follow(
+            follower_id  int not null,
+            following_id  int not null,
+            primary key (follower_id, following_id ),
+            foreign key follower_id references User(ID)
+            on delete cascade on update cascade,
+            foreign key following_id references User(ID) 
+            on delete cascade on update cascade);"""
 
+create_user_song = """create table user_song(
+            user_id   int not null,
+            song_id   int not null,
+            primary key (follower_id, following_id ),
+            foreign key user_id references User(ID)
+            on delete cascade on update cascade,
+            foreign key song_id references Song(ID)
+            on delete cascade on update cascade);"""
 
+create_user_album = """create table user_album(
+            user_id       int not null,
+            album_id      int not null,
+            primary key (user_id, album_id ),
+            foreign key user_id references User(id)
+            on delete cascade on update cascade,
+            foreign key album_id references Album(id)
+            on delete cascade on update cascade);"""
+
+create_artist_song = """create table artist_song(
+            user_id  int not null,
+            song_id  int not null,
+            primary key (user_id, album_id ),
+            foreign key user_id references Artist(user_id)
+            on delete cascade on update cascade,
+            foreign key album_id references Album(id)
+            on delete cascade on update cascade);"""
+
+create_participation = """create table participation(
+            user_id       varchar(10) not null,
+            artist_id     varchar(10) not null,
+            event_id      varchar(10),
+            primary key (user_id,artist_id,event_id),
+            foreign key(user_id) references User(id)
+            on delete cascade on update cascade,
+            foreign key(artist_id) references Artist(user_id)
+            on delete cascade on update cascade,
+            foreign key(event_id) references Event(id)
+            on delete cascade on update cascade);"""
+
+create_playlist_song = """create table playlist_song(
+            song_id       varchar(10) not null,
+            playlist_id   varchar(10) not null,
+            primary key (song_id, playlist_id),
+            foreign key(song_id) references Song(id)
+            on delete cascade on update cascade,
+            foreign key(playlist_id) references Playlist(id)
+            on delete cascade on update cascade);"""
+
+create_comment_reply = """create table comment_reply(
+            reply_id    varchar(10) not null,
+            parent_id   varchar(10) not null,
+            primary key (reply_id),
+            foreign key(parent_id) references Comment(activity_id)
+            on delete cascade on update cascade);"""
+
+create_table_song_genre = """create table song_genre(
+            song_id     varchar(10) not null,
+            genre_name  varchar(10) not null,
+            primary key (song_id, genre_name),
+            foreign key(song_id) references Song(id)
+            on delete cascade on update cascade,
+            foreign key(genre_name) references Genre(name)
+            on delete cascade on update cascade);"""
