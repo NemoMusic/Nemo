@@ -1,5 +1,5 @@
-import os
-from flask import Flask, render_template
+import os as os
+from flask import Flask, render_template, render_template_string
 import pymysql
 
 app = Flask(__name__)
@@ -11,4 +11,7 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
+    #app.debug = True: debug mode
+    host = os.environ.get('IP')
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host=host, port=port)
