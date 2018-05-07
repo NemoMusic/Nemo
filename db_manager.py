@@ -109,21 +109,21 @@ create_follow_table = """create table follow(
 
 
 create_user_follow = """create table user_follow(
-            follower_id  int not null,
+            follower_id   int not null,
             following_id  int not null,
             primary key (follower_id, following_id ),
-            foreign key follower_id references user(ID)
+            foreign key follower_id references user(id)
             on delete cascade on update cascade,
-            foreign key following_id references user(ID) 
+            foreign key following_id references user(id) 
             on delete cascade on update cascade) engine = INNODB;"""
 
 create_user_song = """create table user_song(
             user_id   int not null,
             song_id   int not null,
             primary key (user_id,song_id),
-            foreign key user_id references user(ID)
+            foreign key user_id references user(id)
             on delete cascade on update cascade,
-            foreign key song_id references song(ID)
+            foreign key song_id references song(id)
             on delete cascade on update cascade) engine = INNODB;"""
 
 create_user_album = """create table user_album(
