@@ -35,7 +35,7 @@ create_user_table = """create table user(
             primary key (id)) engine = INNODB;"""
 
 
-create_event_table="""create table event(
+create_event_table = """create table event(
             id          int not null auto_increment,
             name		varchar(50) not null,
             date        date not null,
