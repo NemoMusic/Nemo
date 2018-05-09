@@ -26,19 +26,34 @@ from db_manager import execute_sql
 '''
     Each function's inputs will be given by developers
     Herkes kendi doldurmasi gereken methodu dolduracak
-    edit: tamam paşam
+    edit: tamam pasam
 '''
 # musab erayman
-def create_user(id,email,name,last_name,gender,user_name,password,wallet,birth_date):
+'''
+    creates user,
+    :return id if successful
+    :return Node if unsuccessful
+'''
+def create_user(email,name,last_name,gender,user_name,password,wallet,birth_date):
     query = """
             INSERT INTO user
             VALUES
-            (%s,%s, %s, %s, %s, %s, %s, %s, %s)
+            (DEFAULT ,%s, %s, %s, %s, %s, %s, %s, %s)
             """
     cursor = connection.cursor()
-    cursor.execute(query, (id, email, name, last_name, gender, user_name, password, wallet,None))
-    connection.commit()
-    return cursor.fetchone()
+    try:
+        result = cursor.execute(query, (email, name, last_name, gender, user_name, password, wallet,birth_date))
+        if(result):
+            connection.commit()
+            result2 = cursor.lastrowid
+            if(result2 != None):
+                print(result2)
+                return result2
+            else:
+                return None
+    except:
+        print("The email address or username is already taken!")
+        return None
 
 def remove_user():
     return
@@ -128,3 +143,4 @@ def comment_on_event():
     return
 def reply_to_comment():
     return
+create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
