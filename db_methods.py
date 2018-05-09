@@ -52,10 +52,10 @@ def remove_song():
 # ali bulut
 def login_authentication(email, password):
     sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
-    ret = execute_sql(sql)[0]
+    ret = execute_sql(sql)
     #print(ret)
     if ret != None:
-        return ret
+        return ret[0]
     return False
 
 def create_playlist():
