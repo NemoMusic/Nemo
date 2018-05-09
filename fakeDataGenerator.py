@@ -1,6 +1,6 @@
 import random
 from db_methods import create_user
-from datetime import datetime
+from datetime import date
 import string
 
 uppercaseletters = string.ascii_uppercase
@@ -20,6 +20,12 @@ wallets = []
 birthdate = []
 #genre data variables
 #song data variables
+def birthdateGenerate():
+    year = random.choice(range(1940, 2010))
+    month = random.choice(range(1, 13))
+    day = random.choice(range(1, 29))
+    birthdate = date(year, month,day)
+    return birthdate
 
 def userGenerate(number):
     for x in range(number):
@@ -29,7 +35,6 @@ def userGenerate(number):
         usernamelen = random.choice(range(0,15))
         username = random.choice(lowercaseletters) + random.choice(uppercaseletters) + random.choice(specialcharacters) + random.choice(numerics)
         password = random.choice(lowercaseletters) + random.choice(uppercaseletters) + random.choice(specialcharacters) + random.choice(numerics)
-        birthdateGenerate()
         for a in range(usernamelen):
             case = random.randint(1,4)
             if case == 1:
@@ -55,13 +60,8 @@ def genreGenerate(number):
     return
 def songGenerate(number):
     return
-def birthdateGenerate():
-    #for x in range(number):
-    year = random.choice(range(1940, 2010))
-    month = random.choice(range(1, 13))
-    day = random.choice(range(1, 29))
-    birthdate.append(datetime(year, month, day))
-userGenerate(20)
+
+userGenerate(10)
 
 '''
 for bd in birthdate:
