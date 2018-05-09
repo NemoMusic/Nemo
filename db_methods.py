@@ -58,8 +58,6 @@ def login_authentication(email, password):
         return ret
     return False
 
-login_authentication("asd@gmail.com","123456")
-
 def create_playlist():
     return
 def remove_playlist():
