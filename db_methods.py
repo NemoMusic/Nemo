@@ -26,6 +26,7 @@ from db_manager import execute_sql
 '''
     Each function's inputs will be given by developers
     Herkes kendi doldurmasi gereken methodu dolduracak
+    edit: tamam paşam
 '''
 # musab erayman
 def create_user(id,email,name,last_name,gender,user_name,password,wallet,birth_date):
