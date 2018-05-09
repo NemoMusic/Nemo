@@ -143,4 +143,4 @@ def comment_on_event():
     return
 def reply_to_comment():
     return
-create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
+#create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
