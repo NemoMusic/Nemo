@@ -1,4 +1,5 @@
 import random
+from db_methods import create_user
 from datetime import datetime
 import string
 
@@ -27,18 +28,26 @@ def userGenerate(number):
         gender = random.choice(genders)
         usernamelen = random.choice(range(0,15))
         username = random.choice(lowercaseletters) + random.choice(uppercaseletters) + random.choice(specialcharacters) + random.choice(numerics)
+        password = random.choice(lowercaseletters) + random.choice(uppercaseletters) + random.choice(specialcharacters) + random.choice(numerics)
+        birthdateGenerate()
         for a in range(usernamelen):
             case = random.randint(1,4)
             if case == 1:
                 username += random.choice(lowercaseletters)
+                password += random.choice(lowercaseletters)
             elif case == 2:
                 username += random.choice(uppercaseletters)
+                password += random.choice(uppercaseletters)
             elif case == 3:
                 username += random.choice(specialcharacters)
+                password += random.choice(specialcharacters)
             else:
                 username += random.choice(numerics)
         wallet = random.uniform(0.0,1000.0)
-        print("",user_id ,"username = ", username , "",name , "",lastname , "",gender , "",wallet)
+        birthdate = birthdateGenerate()
+        email = "" + username + "." + name + "@gmail.com"
+        create_user(email,name,lastname,gender,username,password,wallet,birthdate)
+
 
 def artistGenerate(number):
     return
@@ -46,14 +55,13 @@ def genreGenerate(number):
     return
 def songGenerate(number):
     return
-def birthdateGenerate(number):
-    for x in range(number):
-        year = random.choice(range(1940, 2010))
-        month = random.choice(range(1, 13))
-        day = random.choice(range(1, 29))
-        birthdate.append(datetime(year, month, day))
-birthdateGenerate(100)
-userGenerate(100)
+def birthdateGenerate():
+    #for x in range(number):
+    year = random.choice(range(1940, 2010))
+    month = random.choice(range(1, 13))
+    day = random.choice(range(1, 29))
+    birthdate.append(datetime(year, month, day))
+userGenerate(20)
 
 '''
 for bd in birthdate:
