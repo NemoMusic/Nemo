@@ -31,11 +31,11 @@
                 <form action="https://goal.com">
                   <div class="form-group">
                     <label>Email address</label>
-                    <input type="email" class="form-control" placeholder="Enter email" required> </div>
+                    <input type="email" class="form-control" placeholder="Enter email" required=""> </div>
                   <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" required> </div>
-                    <button type="submit" class="btn btn-secondary">Login</button>
+                    <input type="password" class="form-control" placeholder="Password" required=""> </div>
+                  <button type="submit" class="btn btn-secondary">Login</button>
                 </form>
               </div>
             </div>
@@ -48,21 +48,44 @@
             <form action="https://formspree.io/YOUREMAILHERE">
               <div class="form-group">
                 <label for="InputName">Your name</label>
-                <input type="text" class="form-control" placeholder="Your name" id="InputName" required> </div>
+                <input type="text" class="form-control" placeholder="Your name" id="InputName" required=""> </div>
               <div class="form-group">
                 <label for="InputEmail1">Last Name</label>
-                <input type="text" class="form-control" placeholder="Your last name" id="InputEmail1" required> </div>
+                <input type="text" class="form-control" placeholder="Your last name" id="InputEmail1" required=""> </div>
               <div class="form-group">
                 <label for="InputUserName">Username</label>
-                <input type="text" class="form-control" placeholder="Your username" id="InputUserName" required> </div>
+                <input type="text" class="form-control" placeholder="Your username" id="InputUserName" required=""> </div>
               <div class="form-group">
                 <label for="InputEmail">Email</label>
-                <input type="email" class="form-control" placeholder="Your email" id="InputEmail" required> </div>
+                <input type="email" class="form-control" placeholder="Your email" id="InputEmail" required=""> </div>
               <div class="form-group">
                 <label for="InputPassword">Password</label>
-                <input type="password" class="form-control" placeholder="Password" id="InputPassword" required> </div>
-              <div> </div>
-              <button type="submit" class="btn btn-secondary">Signin</button>
+                <input type="password" class="form-control" placeholder="Password" id="InputPassword" required=""> </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label> Account Type </label>
+                  <div>
+                    <input type="radio" id="toggle-on" name="toggle" checked="" value="artist">
+                    <label for="toggle-on">Artist</label>
+                    <input type="radio" id="toggle-off" name="toggle" value="standart">
+                    <label for="toggle-off">Standart</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label> Gender </label>
+                  <div>
+                    <select>
+                      <option value="notToDisclose">notToDisclose</option>
+                      <option value="male">male</option>
+                      <option value="female">female</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h1> </h1>
+              </div>
+              <button type="submit" class="btn btn-secondary">Sign-Up</button>
             </form>
           </div>
         </div>
@@ -86,6 +109,9 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </div>
   </div>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
+    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
+  </pingendo>
 </body>
 
 </html>
