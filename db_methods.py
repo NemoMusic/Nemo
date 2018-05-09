@@ -71,9 +71,19 @@ def userExists(id):
     removes user from the user table if user with the id exists in the table
     gives error message and does not attempt to delete if the user does not exist
     ...can be expanded so that it can return true/false dependent on frontend devs' request
+    ...playlist has no cascade on delete user. So I deleted manually. It should be??? We must look!!!
 '''
 def remove_user(id):
     if userExists(id):
+        query2 = """
+                  select exists(select * from playlist WHERE playlist.user_id = '%s')
+                  """ % id
+        hasPlaylist = execute_sql(query2)
+        if hasPlaylist[0] is 1:
+            execute_sql("""delete from playlist WHERE playlist.user_id = '%s'""" % id)
+            print("All playlists of user with ID ", id, " are successfully deleted.")
+        else:
+            print("User with ID ", id, " has no playlist.")
         query = """
                 delete from user WHERE id = '%s'
                 """ % id
@@ -98,17 +108,17 @@ def login_authentication(email, password):
     if ret != None:
         return ret[0]
     return False
-'''
+
 def create_playlist( title, is_private, user_id):
     sql = "INSERT INTO playlist " \
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
-'''
+
 
 #create_playlist("Bilkent",True,1)
 
-def remove_playlist():
+def remove_playlist(playlist_id):
     return
 def add_song_to_playlist():
     return
@@ -170,4 +180,4 @@ def comment_on_event():
 def reply_to_comment():
     return
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
-remove_user(7)
+remove_user(1)
