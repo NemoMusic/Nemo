@@ -51,12 +51,14 @@ def remove_song():
     return
 # ali bulut
 def login_authentication(email, password):
-    sql = "SELECT * FROM user WHERE (email = %s and password = %s)" % (email, password)
-    ret = execute_sql(sql)
-
+    sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
+    ret = execute_sql(sql)[0]
+    #print(ret)
     if ret != None:
         return ret
     return False
+
+login_authentication("asd@gmail.com","123456")
 
 def create_playlist():
     return
@@ -121,4 +123,4 @@ def comment_on_event():
     return
 def reply_to_comment():
     return
-create_user(2,'sa@gamail.com','isim','soyisim','male','player',"password",'3',None)
+#create_user(2,'sa@gamail.com','isim','soyisim','male','player',"password",'3',None)
