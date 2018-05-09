@@ -1,3 +1,4 @@
+import pprint
 import pymysql
 import datetime as dt
 import time
@@ -20,6 +21,8 @@ def test_connection():
     else:
         return False
 #SQL queries module
+from db_manager import execute_sql
+
 '''
     Each function's inputs will be given by developers
     Herkes kendi doldurmasi gereken methodu dolduracak
@@ -47,6 +50,14 @@ def create_song():
 def remove_song():
     return
 # ali bulut
+def login_authentication(email, password):
+    sql = "SELECT * FROM user WHERE (email = %s and password = %s)" % (email, password)
+    ret = execute_sql(sql)
+
+    if ret != None:
+        return ret
+    return False
+
 def create_playlist():
     return
 def remove_playlist():
