@@ -1,14 +1,41 @@
 import pymysql
-import email
+import datetime as dt
+import time
+connection = None
 
+connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com',
+                            user='nemo',
+                            password='nemoadmin',
+                            db='nemodb')
+
+def execute_sql(sql):
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    return cursor.fetchone()
+
+def test_connection():
+    result = execute_sql("SELECT VERSION()")
+    if result:
+        return True
+    else:
+        return False
 #SQL queries module
 '''
     Each function's inputs will be given by developers
     Herkes kendi doldurmasi gereken methodu dolduracak
 '''
 # musab erayman
-def create_user():
-    return
+def create_user(id,email,name,last_name,gender,user_name,password,wallet,birth_date):
+    query = """
+            INSERT INTO user
+            VALUES
+            (%s,%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+    cursor = connection.cursor()
+    cursor.execute(query, (id, email, name, last_name, gender, user_name, password, wallet,None))
+    connection.commit()
+    return cursor.fetchone()
+
 def remove_user():
     return
 def create_artist():
@@ -83,3 +110,4 @@ def comment_on_event():
     return
 def reply_to_comment():
     return
+create_user(2,'sa@gamail.com','isim','soyisim','male','player',"password",'3',None)
