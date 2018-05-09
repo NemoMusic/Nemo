@@ -55,8 +55,33 @@ def create_user(email,name,last_name,gender,user_name,password,wallet,birth_date
         print("The email address or username is already taken!")
         return None
 
-def remove_user():
-    return
+'''
+    checks if user with the id whether exists or not
+    :return 1 if exists
+    :return 0 if does not
+'''
+def userExists(id):
+    query = """
+            select exists(select * from user WHERE id = '%s')
+            """ % id
+    result = execute_sql(query)
+    return result[0]
+
+'''
+    removes user from the user table if user with the id exists in the table
+    gives error message and does not attempt to delete if the user does not exist
+    ...can be expanded so that it can return true/false dependent on frontend devs' request
+'''
+def remove_user(id):
+    if userExists(id):
+        query = """
+                delete from user WHERE id = '%s'
+                """ % id
+        execute_sql(query)
+        print("The user with ID ", id, " is successfully deleted.")
+    else:
+        print("The user with ID ", id, " does not exist.")
+
 def create_artist():
     return
 def remove_artist():
@@ -73,14 +98,15 @@ def login_authentication(email, password):
     if ret != None:
         return ret[0]
     return False
-
+'''
 def create_playlist( title, is_private, user_id):
     sql = "INSERT INTO playlist " \
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
+'''
 
-create_playlist("Bilkent",True,1)
+#create_playlist("Bilkent",True,1)
 
 def remove_playlist():
     return
@@ -144,3 +170,4 @@ def comment_on_event():
 def reply_to_comment():
     return
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
+remove_user(7)
