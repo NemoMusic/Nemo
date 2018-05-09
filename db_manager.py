@@ -11,6 +11,7 @@ connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com
 def execute_sql(sql):
     cursor = connection.cursor()
     cursor.execute(sql)
+    connection.commit()
     return cursor.fetchone()
 
 

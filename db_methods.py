@@ -59,8 +59,14 @@ def login_authentication(email, password):
         return ret[0]
     return False
 
-def create_playlist():
-    return
+def create_playlist( title, is_private, user_id):
+    sql = "INSERT INTO playlist " \
+          "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
+          % (title, dt.datetime.now().date(), is_private, user_id)
+    execute_sql(sql)
+
+create_playlist("Bilkent",True,1)
+
 def remove_playlist():
     return
 def add_song_to_playlist():
