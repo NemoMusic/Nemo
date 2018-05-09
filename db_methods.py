@@ -32,7 +32,7 @@ from db_manager import execute_sql
 '''
     creates user,
     :return id if successful
-    :return Node if unsuccessful
+    :return None if unsuccessful
 '''
 def create_user(email,name,last_name,gender,user_name,password,wallet,birth_date):
     query = """
