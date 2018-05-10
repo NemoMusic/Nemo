@@ -43,8 +43,8 @@ def signIn():
     user_type = request.form["user_type"]
     signIn = db_methods.create_user(email,name,lastname,gender,username,password,0,dt.datetime(2000,2,3))
     if signIn:
-        signIn['user_id'] = str(signIn)
-        render_template('my_songs.html')
+        session['user_id'] = str(signIn)
+        return render_template('my_songs.html')
     else:
         return render_template('login.html', message2 ="Username or Email Exist")
 
