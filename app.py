@@ -2,6 +2,7 @@ import os as os
 from flask import Flask, render_template, request, session, redirect
 import pymysql
 import db_methods
+import datetime as dt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
@@ -26,9 +27,9 @@ def loginSignin():
     if login:
         session['user_id'] = login
         print(session['user_id'])
-        return render_template('welcome.html')
+        return render_template('my_songs.html')
     else:
-        return render_template('login.html',message ="Email or Password Incorrect")
+        return render_template('login.html',message1 ="Email or Password Incorrect")
 
 
 @app.route('/signIn', methods=["POST","GET"])
@@ -38,9 +39,14 @@ def signIn():
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"]
-    db_methods.create_user(name)
-
-
+    gender = request.form["gender"]
+    user_type = request.form["user_type"]
+    signIn = db_methods.create_user(email,name,lastname,gender,username,password,0,dt.datetime(2000,2,3))
+    if signIn:
+        signIn['user_id'] = str(signIn)
+        render_template('my_songs.html')
+    else:
+        return render_template('login.html', message2 ="Username or Email Exist")
 
 
 if __name__ == '__main__':

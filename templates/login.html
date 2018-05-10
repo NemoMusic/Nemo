@@ -28,7 +28,7 @@
             <div class="card text-white p-5 bg-primary">
               <div class="card-body">
                 <h1 class="mb-4">Login form</h1>
-                <h4> {{message}}</h4>
+                <h4> {{message1}}</h4>
                 <form action="/home" method="post" id="login">
                   <div class="form-group">
                     <label class="text-secondary">Email address</label>
@@ -46,7 +46,8 @@
         <div class="col-md-6">
           <div class="card-body">
             <h1 class="mb-4">Sign Up</h1>
-            <form action="https://formspree.io/YOUREMAILHERE">
+            <h4> {{message2}}</h4>
+            <form action="/signIn" method="post">
               <div class="form-group">
                 <label for="InputName" class="text-secondary">Your name</label>
                 <input type="text" name="name" class="form-control" placeholder="Your name" id="InputName" required=""> </div>
@@ -68,9 +69,9 @@
                     <div>
                       <label for="UserType" class="text-secondary">User Type</label>
                     </div>
-                    <input type="radio" id="toggle-on" name="toggle" checked="" value="standart">
+                    <input type="radio" id="toggle-on" name="user_type" checked="" value="standart">
                     <label for="toggle-on">Standart</label>
-                    <input type="radio" id="toggle-off" name="toggle" value="artist">
+                    <input type="radio" id="toggle-off" name="user_type" value="artist">
                     <label for="toggle-off">Artist</label>
                   </div>
                 </div>
@@ -78,7 +79,7 @@
                   <div>
                     <label for="Gender" class="text-secondary">Gender</label>
                   </div>
-                  <select>
+                  <select name="gender">
                     <option value="not">Not to disclose</option>
                     <option value="female">Male</option>
                     <option value="male">Female</option>
