@@ -19,15 +19,17 @@ class Artist:
 # Genre is a seperate table in db but added into a Song in class diagram because it has no other function
 class Song:
 
-    def __init__(self, user_id, title, release_date, duration, number_of_listen, price, album_id, genres):
-        self.user_id = user_id
+    def __init__(self, song_id, title, release_date, duration, number_of_listen, price, album_id, genre, artist_name, album_name):
+        self.song_id = song_id
         self.title = title
         self.release_date = release_date
         self.duration = duration
         self.number_of_listen = number_of_listen
         self.price = price
         self.album_id = album_id
-        self.genres = genres
+        self.genre = genre
+        self.artist_name = artist_name
+        self.album_name = album_name
 
 
 class Playlist:

@@ -11,6 +11,8 @@ app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
 def hello():
     if 'user_id' in session:
         return render_template('my_songs.html')
+
+
     else:
         return redirect('/login')
 
