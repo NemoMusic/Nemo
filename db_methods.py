@@ -113,19 +113,20 @@ def create_song(title,release_date,duration,number_of_listen,price,album_id):
     query = """
             insert into song
             VALUES
-            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', )
+            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s' )
             """ %(title,release_date,duration,number_of_listen,price,album_id)
     execute_sql(query)
+
 def remove_song(id):
     query = """
             delete from song WHERE (song.id = '%s')
             """ % (id)
     execute_sql(query)
+
 # ali bulut
 def login_authentication(email, password): #tested
     sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
     ret = execute_sql(sql)
-    #print(ret)
     if ret != None:
         return ret[0]
     return False
@@ -134,7 +135,7 @@ def create_playlist( title, is_private, user_id): #tested
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
-#create_playlist("Bilkent",True,1)
+
 def remove_playlist( playlist_id ): #tested
     sql = "DELETE FROM playlist WHERE id = '%s'" % playlist_id
     execute_sql(sql)
@@ -145,7 +146,7 @@ def add_song_to_playlist( song_id, playlist_id):
     return
 def remove_song_from_playlist( song_id, playlist_id):
     sql = "DELETE FROM playlist_song " \
-          " WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
+          "WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
     execute_sql(sql)
     return
 def create_event( name, date, location, about): #tested
@@ -165,6 +166,7 @@ def artist_attend_to_event( artist_id, event_id ):
     sql = "INSERT INTO participation_artist VALUE ('%s', '%s')" % artist_id, event_id
     execute_sql(sql)
     return
+
 # omer faruk karakaya
 def follow_user():
     return
@@ -181,14 +183,26 @@ def rate_playlist():
     return
 def rate_album():
     return
-def create_genre():
+def create_genre( name ):
+    sql = "INSERT INTO genre VALUE ('%s')" % name
+    execute_sql(sql)
     return
-def remove_genre():
+
+def remove_genre( name ):
+    sql = "DELETE FROM genre WHERE name = '%s'" % name
+    execute_sql(sql)
     return
-def create_album():
+
+def create_album( title, release_date, price ): #tested
+    sql = "INSERT INTO album VALUE (DEFAULT, '%s', '%s', '%s')" % (title, release_date, price)
+    execute_sql(sql)
     return
-def remove_album():
+
+def remove_album( id ): #tested
+    sql = "DELETE FROM album WHERE id = '%s'" % id
+    execute_sql(sql)
     return
+
 # musab erayman
 def purchase_song(user_id,song_id):
     wallet ="""
@@ -262,3 +276,9 @@ def reply_to_comment():
     return
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
+
+#converts seconds to min and sec
+#time.strftime( "%M:%S", time.gmtime(186) )
+
+#create_album("Use Your Illusion", dt.datetime(1991,1,1), 20)
+#create_song("Dont Cry", dt.datetime(1991,1,1), time.strftime("%M%S",time.gmtime(284)), 3, 5, 2)
