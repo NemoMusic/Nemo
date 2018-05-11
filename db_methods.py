@@ -101,7 +101,7 @@ def create_song():
 def remove_song():
     return
 # ali bulut
-def login_authentication(email, password):
+def login_authentication(email, password): #tested
     sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
     ret = execute_sql(sql)
     #print(ret)
@@ -109,27 +109,50 @@ def login_authentication(email, password):
         return ret[0]
     return False
 
-def create_playlist( title, is_private, user_id):
+def create_playlist( title, is_private, user_id): #tested
     sql = "INSERT INTO playlist " \
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
+    return
 
+def remove_playlist( playlist_id ): #tested
+    sql = "DELETE FROM playlist WHERE id = '%s'" % playlist_id
+    execute_sql(sql)
+    return
 
-#create_playlist("Bilkent",True,1)
+def add_song_to_playlist( song_id, playlist_id):
+    sql = "INSERT INTO playlist_song VALUE ('%s', '%s')" % (song_id, playlist_id)
+    execute_sql(sql)
+    return
 
-def remove_playlist(playlist_id):
+def remove_song_from_playlist( song_id, playlist_id):
+    sql = "DELETE FROM playlist_song " \
+          " WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
+    execute_sql(sql)
     return
-def add_song_to_playlist():
+
+def create_event( name, date, location, about): #tested
+    sql = "INSERT INTO event " \
+          "VALUE (DEFAULT, '%s', '%s', '%s', '%s')" % (name, date, location, about)
+    execute_sql(sql)
     return
-def remove_song_from_playlist():
+
+def remove_event( id ): #tested
+    sql = "DELETE FROM event WHERE id = '%s'" % id
+    execute_sql(sql)
     return
-def create_event():
+
+def user_attend_to_event( user_id, event_id ): #tested
+    sql = "INSERT INTO participation_user VALUE ('%s', '%s')" % (user_id, event_id)
+    execute_sql(sql)
     return
-def remove_event():
+
+def artist_attend_to_event( artist_id, event_id ):
+    sql = "INSERT INTO participation_artist VALUE ('%s', '%s')" % artist_id, event_id
+    execute_sql(sql)
     return
-def attend_to_event():
-    return
+
 # omer faruk karakaya
 def follow_user():
     return
@@ -180,4 +203,4 @@ def comment_on_event():
 def reply_to_comment():
     return
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
-remove_user(1)
+#remove_user(1)
