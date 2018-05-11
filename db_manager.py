@@ -133,6 +133,7 @@ create_user_follow = """create table user_follow(
             foreign key(following_id) references user(id) 
             on delete cascade on update cascade) engine = INNODB;"""
 
+
 create_user_song = """create table user_song(
             user_id   int not null,
             song_id   int not null,
@@ -159,7 +160,7 @@ create_artist_song = """create table artist_song(
             on delete cascade on update cascade,
             foreign key(song_id) references album(id)
             on delete cascade on update cascade) engine = INNODB;"""
-
+'''
 create_participation = """create table participation(
             user_id       int not null,
             artist_id     int not null,
@@ -167,6 +168,23 @@ create_participation = """create table participation(
             primary key (user_id,artist_id,event_id),
             foreign key(user_id) references user(id)
             on delete cascade on update cascade,
+            foreign key(artist_id) references artist(user_id)
+            on delete cascade on update cascade,
+            foreign key(event_id) references event(id)
+            on delete cascade on update cascade) engine = INNODB;"""
+'''
+create_participation_user = """ create table participation_user(
+            user_id       int not null,
+            event_id      int not null,
+            primary key(user_id,event_id),
+            foreign key(user_id) references user(id)
+            on delete cascade on update cascade,
+            foreign key(event_id) references event(id)
+            on delete cascade on update cascade) engine = INNODB;"""
+create_participation_artist = """create table participation_artist(
+            artist_id       int not null,
+            event_id      int not null,
+            primary key(artist_id,event_id),
             foreign key(artist_id) references artist(user_id)
             on delete cascade on update cascade,
             foreign key(event_id) references event(id)
@@ -213,7 +231,8 @@ create_table_song_genre = """create table song_genre(
 #execute_sql(create_user_song)
 #execute_sql(create_user_album)
 #execute_sql(create_artist_song)
-#execute_sql(create_participation)
 #execute_sql(create_playlist_song)
 #execute_sql(create_comment_reply)
 #execute_sql(create_table_song_genre)
+#execute_sql(create_participation_artist)
+#execute_sql(create_participation_user)
