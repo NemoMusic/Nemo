@@ -22,6 +22,16 @@ def test_connection():
         return False
 #SQL queries module
 from db_manager import execute_sql
+#ENTITY TYPES
+song = "SONG"
+album = "ALBUM"
+user = "USER"
+comment_e = "COMME"
+#ACTIVITY TYPES
+follow = "FOLLO"
+rate = "RATE"
+share = "SHARE"
+comment_a = "COMME"
 
 '''
     Each function's inputs will be given by developers
@@ -109,24 +119,34 @@ def remove_artist(id):
                  delete from user WHERE (user.id = '%s')
                  """ % (id)
     execute_sql(user_query)
-def create_song(title,release_date,duration,number_of_listen,price,album_id):
+'''
+    :return created song id
+'''
+def create_song(title,release_date,duration,number_of_listen,price,album_id,artist_id):
     query = """
             insert into song
             VALUES
-            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s' )
+            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', )
             """ %(title,release_date,duration,number_of_listen,price,album_id)
+    cursor = connection.cursor()
     execute_sql(query)
-
+    song_id = cursor.lastrowid
+    query2 =    """
+                insert into artist_song
+                VALUES ('%s', '%s')
+                """ %(artist_id,song_id)
+    execute_sql(query2)
+    return song_id
 def remove_song(id):
     query = """
             delete from song WHERE (song.id = '%s')
             """ % (id)
     execute_sql(query)
-
 # ali bulut
 def login_authentication(email, password): #tested
     sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
     ret = execute_sql(sql)
+    #print(ret)
     if ret != None:
         return ret[0]
     return False
@@ -135,7 +155,7 @@ def create_playlist( title, is_private, user_id): #tested
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
-
+#create_playlist("Bilkent",True,1)
 def remove_playlist( playlist_id ): #tested
     sql = "DELETE FROM playlist WHERE id = '%s'" % playlist_id
     execute_sql(sql)
@@ -146,7 +166,7 @@ def add_song_to_playlist( song_id, playlist_id):
     return
 def remove_song_from_playlist( song_id, playlist_id):
     sql = "DELETE FROM playlist_song " \
-          "WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
+          " WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
     execute_sql(sql)
     return
 def create_event( name, date, location, about): #tested
@@ -166,7 +186,6 @@ def artist_attend_to_event( artist_id, event_id ):
     sql = "INSERT INTO participation_artist VALUE ('%s', '%s')" % artist_id, event_id
     execute_sql(sql)
     return
-
 # omer faruk karakaya
 def follow_user():
     return
@@ -177,8 +196,13 @@ def follow_playlist():
 def unfollow_playlist():
     return
 # kerem ayoz
-def rate_song(song_id):
-    return
+def rate_song(user_id, song_id, value):
+    act_id = create_activity(currentdate,song,rate,user_id)
+    query = """
+            insert into rate
+            VALUES ('%s' ,'%s')
+            """ % (act_id,value)
+    execute_sql(query)
 def rate_playlist():
     return
 def rate_album():
@@ -202,7 +226,6 @@ def remove_album( id ): #tested
     sql = "DELETE FROM album WHERE id = '%s'" % id
     execute_sql(sql)
     return
-
 # musab erayman
 def purchase_song(user_id,song_id):
     wallet ="""
@@ -255,7 +278,10 @@ def create_activity(date,ent_type,act_type,user_id):
             insert into activity
             VALUES (DEFAULT,'%s','%s','%s','%s')
             """ % (date,ent_type,act_type,user_id)
+    cursor = connection.cursor()
     execute_sql(query)
+    activity_id = cursor.lastrowid
+    return activity_id
 # ali bulut
 def share_song():
     return
