@@ -129,56 +129,42 @@ def login_authentication(email, password): #tested
     if ret != None:
         return ret[0]
     return False
-
 def create_playlist( title, is_private, user_id): #tested
     sql = "INSERT INTO playlist " \
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
-
-
 #create_playlist("Bilkent",True,1)
-
-def remove_playlist(playlist_id):
-    return
-
 def remove_playlist( playlist_id ): #tested
     sql = "DELETE FROM playlist WHERE id = '%s'" % playlist_id
     execute_sql(sql)
     return
-
 def add_song_to_playlist( song_id, playlist_id):
     sql = "INSERT INTO playlist_song VALUE ('%s', '%s')" % (song_id, playlist_id)
     execute_sql(sql)
     return
-
 def remove_song_from_playlist( song_id, playlist_id):
     sql = "DELETE FROM playlist_song " \
           " WHERE (song_id = '%s' AND playlist_id = '%s')" % (song_id, playlist_id)
     execute_sql(sql)
     return
-
 def create_event( name, date, location, about): #tested
     sql = "INSERT INTO event " \
           "VALUE (DEFAULT, '%s', '%s', '%s', '%s')" % (name, date, location, about)
     execute_sql(sql)
     return
-
 def remove_event( id ): #tested
     sql = "DELETE FROM event WHERE id = '%s'" % id
     execute_sql(sql)
     return
-
 def user_attend_to_event( user_id, event_id ): #tested
     sql = "INSERT INTO participation_user VALUE ('%s', '%s')" % (user_id, event_id)
     execute_sql(sql)
     return
-
 def artist_attend_to_event( artist_id, event_id ):
     sql = "INSERT INTO participation_artist VALUE ('%s', '%s')" % artist_id, event_id
     execute_sql(sql)
     return
-
 # omer faruk karakaya
 def follow_user():
     return
@@ -189,8 +175,6 @@ def follow_playlist():
 def unfollow_playlist():
     return
 # kerem ayoz
-def create_activity():
-    return
 def rate_song(song_id):
     return
 def rate_playlist():
@@ -256,7 +240,7 @@ def create_activity(date,ent_type,act_type,user_id):
     query = """
             insert into activity
             VALUES (DEFAULT,'%s','%s','%s','%s')
-            """%(date,ent_type,act_type,user_id)
+            """ % (date,ent_type,act_type,user_id)
     execute_sql(query)
 # ali bulut
 def share_song():
