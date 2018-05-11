@@ -233,7 +233,7 @@ def purchase_song(user_id,song_id):
             """ % (user_id)
     wallet_ = execute_sql(wallet)
     song_price =    """
-                    select price from song WHERE (song.id = '%s' )
+                    select price from song WHERE (song.id = '%s')
                     """ % (song_id)
     song_price_ = execute_sql(song_price)
     if song_price_ > wallet_:
@@ -245,6 +245,11 @@ def purchase_song(user_id,song_id):
                         update user set wallet = %s WHERE (user.id = '%s')
                         """ %(newwallet,user_id)
         execute_sql(update_query)
+        song_user_query = """
+                          insert into user_song
+                          VALUES ('%s','%s')
+                          """ % ( user_id, song_id )
+        execute_sql(song_user_query)
 def purchase_album(user_id,album_id):
     wallet ="""
             select wallet from user WHERE (user.id = '%s')
@@ -263,6 +268,11 @@ def purchase_album(user_id,album_id):
                         update user set wallet = %s WHERE (user.id = '%s')
                         """ %(newwallet,user_id)
         execute_sql(update_query)
+        album_user_query = """
+                          insert into user_album
+                          VALUES ('%s','%s')
+                          """ % ( user_id, album_id)
+        execute_sql(album_user_query)
 def add_money_to_wallet(user_id,money):
     wallet ="""
             select wallet from user WHERE (user.id = '%s')
