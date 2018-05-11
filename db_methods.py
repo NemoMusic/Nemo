@@ -92,14 +92,35 @@ def remove_user(id):
     else:
         print("The user with ID ", id, " does not exist.")
 
-def create_artist():
-    return
-def remove_artist():
-    return
-def create_song():
-    return
-def remove_song():
-    return
+def create_artist(email,name,last_name,gender,user_name,password,wallet,birth_date):
+    id = create_user(email,name,last_name,gender,user_name,password,wallet,birth_date)
+    query = """
+            insert into artist
+            VALUES(%s,%s) 
+            """ %(id,dt.datetime.now().date())
+    execute_sql(query)
+    return id
+def remove_artist(id):
+    art_query = """
+                delete from artist WHERE (artist.user_id = '%s')
+                """ % (id)
+    execute_sql(art_query)
+    user_query = """
+                 delete from user WHERE (user.id = '%s')
+                 """ % (id)
+    execute_sql(user_query)
+def create_song(title,release_date,duration,number_of_listen,price,album_id):
+    query = """
+            insert into song
+            VALUES
+            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', )
+            """ %(title,release_date,duration,number_of_listen,price,album_id)
+    execute_sql(query)
+def remove_song(id):
+    query = """
+            delete from song WHERE (song.id = '%s')
+            """ % (id)
+    execute_sql(query)
 # ali bulut
 def login_authentication(email, password): #tested
     sql = "SELECT id FROM user WHERE (email = '%s' and password = '%s')" % (email, password)
@@ -114,6 +135,11 @@ def create_playlist( title, is_private, user_id): #tested
           "VALUE (DEFAULT , '%s', '%s', '%s', '%s')" \
           % (title, dt.datetime.now().date(), is_private, user_id)
     execute_sql(sql)
+
+
+#create_playlist("Bilkent",True,1)
+
+def remove_playlist(playlist_id):
     return
 
 def remove_playlist( playlist_id ): #tested
@@ -163,7 +189,9 @@ def follow_playlist():
 def unfollow_playlist():
     return
 # kerem ayoz
-def rate_song():
+def create_activity():
+    return
+def rate_song(song_id):
     return
 def rate_playlist():
     return
@@ -178,12 +206,58 @@ def create_album():
 def remove_album():
     return
 # musab erayman
-def purchase_song():
-    return
-def purchase_album():
-    return
-def add_money_to_wallet():
-    return
+def purchase_song(user_id,song_id):
+    wallet ="""
+            select wallet from user WHERE (user.id = '%s')
+            """ % (user_id)
+    wallet_ = execute_sql(wallet)
+    song_price =    """
+                    select price from song WHERE (song.id = '%s' )
+                    """ % (song_id)
+    song_price_ = execute_sql(song_price)
+    if song_price_ > wallet_:
+        print("PMVY")
+        return None
+    else:
+        newwallet = wallet_ - song_price_
+        update_query =  """
+                        update user set wallet = %s WHERE (user.id = '%s')
+                        """ %(newwallet,user_id)
+        execute_sql(update_query)
+def purchase_album(user_id,album_id):
+    wallet ="""
+            select wallet from user WHERE (user.id = '%s')
+            """ % (user_id)
+    wallet_ = execute_sql(wallet)
+    album_price =    """
+                    select price from album WHERE (album.id = '%s' )
+                    """ % (album_id)
+    album_price_ = execute_sql(album_price)
+    if album_price_ > wallet_:
+        print("PMVY")
+        return None
+    else:
+        newwallet = wallet_ - album_price_
+        update_query =  """
+                        update user set wallet = %s WHERE (user.id = '%s')
+                        """ %(newwallet,user_id)
+        execute_sql(update_query)
+def add_money_to_wallet(user_id,money):
+    wallet ="""
+            select wallet from user WHERE (user.id = '%s')
+            """ % (user_id)
+    wallet_ = execute_sql(wallet)
+    newwallet = wallet_ + money
+    update_query =  """
+                    update user set wallet = %s WHERE (user.id = '%s')
+                    """ %(newwallet,user_id)
+    execute_sql(update_query)
+def create_activity(date,ent_type,act_type,user_id):
+    query = """
+            insert into activity
+            VALUES (DEFAULT,'%s','%s','%s','%s')
+            """%(date,ent_type,act_type,user_id)
+    execute_sql(query)
 # ali bulut
 def share_song():
     return
