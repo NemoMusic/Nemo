@@ -1,4 +1,3 @@
-import pprint
 import pymysql
 import datetime as dt
 import time
@@ -63,7 +62,7 @@ def create_user(email,name,last_name,gender,user_name,password,wallet,birth_date
                 print(result2)
                 return result2
             else:
-                return None
+                return -1
     except:
         print("The email address or username is already taken!")
         return None
@@ -129,10 +128,11 @@ def create_song(title,release_date,duration,number_of_listen,price,album_id,arti
     query = """
             insert into song
             VALUES
-            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s', )
-            """ %(title,release_date,duration,number_of_listen,price,album_id)
+            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s')
+            """ % ( title,release_date,duration,number_of_listen,price,album_id )
     cursor = connection.cursor()
-    execute_sql(query)
+    cursor.execute(query)
+    connection.commit()
     song_id = cursor.lastrowid
     query2 =    """
                 insert into artist_song
@@ -200,7 +200,7 @@ def unfollow_playlist():
     return
 # kerem ayoz
 def rate_song(user_id, song_id, value):
-    act_id = create_activity(currentdate,song,rate,user_id)
+    act_id = create_activity(dt.datetime.now(),song,rate,user_id)
     query = """
             insert into rate
             VALUES ('%s' ,'%s')
@@ -356,3 +356,5 @@ def get_songs_of_users( user_id ):
 
 #create_album("Use Your Illusion", dt.datetime(1991,1,1), 20)
 #create_song("Dont Cry", dt.datetime(1991,1,1), time.strftime("%M%S",time.gmtime(284)), 3, 5, 2)
+#create_artist('esda@dasadsda','isim','ast','male','ushsarkierer',"pass",'3',dt.datetime(2000,2,1))
+create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105)
