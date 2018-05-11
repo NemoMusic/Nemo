@@ -2,6 +2,9 @@ import pprint
 import pymysql
 import datetime as dt
 import time
+
+from models import Song
+
 connection = None
 
 connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com',
@@ -310,6 +313,41 @@ def comment_on_event():
     return
 def reply_to_comment():
     return
+
+def get_songs_of_users( user_id ):
+
+    sql = "SELECT song_id FROM user_song  WHERE user_id = '%s'" % user_id
+
+    song_ids = execute_sql(sql)
+
+    res = []
+
+    for song_it in song_ids:
+
+        sql = "SELECT * FROM song WHERE id = '%s'" % song_it
+        sng = execute_sql(sql)
+
+        sql = "SELECT genre_name FROM song_genre WHERE song_id = '%s'" % sng[0]
+        gen_names = execute_sql(sql)
+
+        genres = []
+        for gen_it in gen_names:
+            genres.append(gen_it)
+
+        sql = "SELECT album.title FROM song natural join album WHERE song.id = '%s'" % sng[0]
+        album_name = execute_sql(sql)
+
+        sql = "SELECT user.name " \
+              "FROM user natural join artist natural join artist_song " \
+              "WHERE song_id = '%s'" % sng[0]
+        artist_name = execute_sql(sql)
+
+        s = Song( sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], genres, artist_name , album_name )
+
+        res.append(s)
+
+    return res
+
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
 
