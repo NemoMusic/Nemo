@@ -58,5 +58,10 @@ def mySons():
 def market():
     return render_template('market.html')
 
+
+@app.route('/timeline')
+def timeline():
+    return render_template('timeline.html')
+
 if __name__ == '__main__':
     app.run()

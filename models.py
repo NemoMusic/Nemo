@@ -90,6 +90,15 @@ class Comment:
         self.reply_list = reply_list
 
 
+class ActivityReport:
+    def __init__(self, activity_id, date, entity_type, entity_id, text):
+        self.activity_id = activity_id
+        self.date = date
+        self.entity_type = entity_type
+        self.entity_id = entity_id
+        self.text = text
+
+
 
 
 
