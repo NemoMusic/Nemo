@@ -319,7 +319,7 @@ def get_songs_of_users( user_id ):
     sql = "SELECT song_id FROM user_song  WHERE user_id = '%s'" % user_id
 
     song_ids = execute_sql(sql)
-
+    print("----", song_ids)
     res = []
 
     for song_it in song_ids:
@@ -327,22 +327,16 @@ def get_songs_of_users( user_id ):
         sql = "SELECT * FROM song WHERE id = '%s'" % song_it
         sng = execute_sql(sql)
 
-        sql = "SELECT genre_name FROM song_genre WHERE song_id = '%s'" % sng[0]
-        gen_names = execute_sql(sql)
-
-        genres = []
-        for gen_it in gen_names:
-            genres.append(gen_it)
-
-        sql = "SELECT album.title FROM song natural join album WHERE song.id = '%s'" % sng[0]
+        sql = "SELECT album.title FROM song join album WHERE song.id = '%s'" % song_it
         album_name = execute_sql(sql)
 
-        sql = "SELECT user.name " \
-              "FROM user natural join artist natural join artist_song " \
-              "WHERE song_id = '%s'" % sng[0]
+        sql = """SELECT user.name FROM user WHERE user.id = 
+              (SELECT artist.user_id 
+              FROM artist_song natural join artist
+              WHERE artist_song.song_id = '%s')""" % song_it
         artist_name = execute_sql(sql)
 
-        s = Song( sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], genres, artist_name , album_name )
+        s = Song( sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], artist_name[0] , album_name[0] )
 
         res.append(s)
 

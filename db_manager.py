@@ -158,7 +158,7 @@ create_artist_song = """create table artist_song(
             primary key (user_id,song_id),
             foreign key(user_id) references artist(user_id)
             on delete cascade on update cascade,
-            foreign key(song_id) references album(id)
+            foreign key(song_id) references song(id)
             on delete cascade on update cascade) engine = INNODB;"""
 '''
 create_participation = """create table participation(
