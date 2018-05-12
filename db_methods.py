@@ -11,9 +11,11 @@ connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com
                             password='nemoadmin',
                             db='nemodb')
 
-def execute_sql(sql):
+def execute_sql(sql, type=0):
     cursor = connection.cursor()
     cursor.execute(sql)
+    if type:
+        return cursor.fetchall()
     return cursor.fetchone()
 
 def test_connection():
@@ -23,7 +25,6 @@ def test_connection():
     else:
         return False
 #SQL queries module
-from db_manager import execute_sql
 #ENTITY TYPES
 song = "SONG"
 album = "ALBUM"
@@ -317,33 +318,48 @@ def reply_to_comment():
 def get_songs_of_users( user_id ):
 
     sql = "SELECT song_id FROM user_song  WHERE user_id = '%s'" % user_id
-
-    song_ids = execute_sql(sql)
-    print("----", song_ids)
+    song_ids = execute_sql(sql,1)
     res = []
+
+    print(song_ids)
 
     if song_ids == None:
         return res
 
     for song_it in song_ids:
 
-        sql = "SELECT * FROM song WHERE id = '%s'" % song_it
+        sql = "SELECT * FROM song join album WHERE song.id = '%s' and song.album_id = album.id" % song_it[0]
         sng = execute_sql(sql)
-
-        sql = "SELECT album.title FROM song join album WHERE song.id = '%s'" % song_it
-        album_name = execute_sql(sql)
 
         sql = """SELECT user.name FROM user WHERE user.id = 
               (SELECT artist.user_id 
               FROM artist_song natural join artist
-              WHERE artist_song.song_id = '%s')""" % song_it
+              WHERE artist_song.song_id = '%s')""" % song_it[0]
         artist_name = execute_sql(sql)
 
-        s = Song( sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], artist_name[0] , album_name[0] )
-
+        s = Song( sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], artist_name[0], sng[9] )
         res.append(s)
 
     return res
+
+def get_songs_by_most_listened():
+    sql = "SELECT song.id FROM song ORDER BY number_of_listen DESC "
+    song_ids = execute_sql(sql,1)
+    res = []
+
+    if song_ids == None:
+        return res
+
+    for song_it in song_ids:
+        #print("====", song_it)
+        sql = "SELECT s.*, u.name " \
+              "FROM artist a natural join artist_song a_s join song s join user u " \
+              "WHERE s.id = a_s.song_id and u.id = a.user_id and a_s.song_id = '%d'" % song_it[0]
+        sng = execute_sql(sql)
+        #print(sng)
+        s = Song(sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], sng[8], None)
+
+        res.append(s)
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
