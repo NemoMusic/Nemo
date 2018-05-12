@@ -264,7 +264,8 @@ def purchase_song(user_id,song_id):
                             update user set wallet = %s WHERE (user.id = '%s')
                             """ %(newwallet,user_id)
             execute_sql(update_query)
-
+            print("Payment is done")
+            return ("Payment is done")
     except pymysql.IntegrityError as e:
         if (e.args[0] == 1062):
             print("User ", user_id, " has already purchased song ", song_id)
@@ -295,6 +296,7 @@ def purchase_album(user_id,album_id):
                             """ %(newwallet,user_id)
             execute_sql(update_query)
             print("Payment is done")
+            return("Payment is done")
     except pymysql.IntegrityError as e:
         if(e.args[0] == 1062):
             print ("User ", user_id, " has already purchased album ", album_id)
