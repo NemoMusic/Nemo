@@ -2,7 +2,7 @@ import pymysql
 import datetime as dt
 import time
 
-from models import Song
+from models import Song, Album
 
 connection = None
 
@@ -351,15 +351,37 @@ def get_songs_by_most_listened():
         return res
 
     for song_it in song_ids:
-        #print("====", song_it)
         sql = "SELECT s.*, u.name " \
               "FROM artist a natural join artist_song a_s join song s join user u " \
               "WHERE s.id = a_s.song_id and u.id = a.user_id and a_s.song_id = '%d'" % song_it[0]
         sng = execute_sql(sql)
-        #print(sng)
-        s = Song(sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], sng[8], None)
 
+        s = Song(sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], sng[8], None)
         res.append(s)
+
+    return res
+
+def get_albums_by_most_listened():
+    sql = "SELECT album_id FROM (" \
+          "SELECT sum(s.number_of_listen) ttl_nmbr, s.album_id " \
+          "FROM song s " \
+          "GROUP BY s.album_id) as ttl " \
+          "ORDER BY ttl.ttl_nmbr DESC "
+    album_ids = execute_sql(sql,1)
+    res = []
+
+    if album_ids == None:
+        return res
+
+    for album_it in album_ids:
+        sql = "SELECT * FROM album WHERE id = '%s'" % album_it[0]
+        albm = execute_sql(sql)
+
+        a = Album( albm[0], albm[1], albm[2], albm[3] )
+        res.append(a)
+
+    return res
+
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
