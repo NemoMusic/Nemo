@@ -1,6 +1,7 @@
 import pymysql
 import datetime as dt
 import time
+import models
 
 from models import Song, Album
 
@@ -192,7 +193,12 @@ def artist_attend_to_event( artist_id, event_id ):
     execute_sql(sql)
     return
 # omer faruk karakaya
-def follow_user():
+def follow_user(self_user_id, to_follow_id):
+    query = """
+            insert into user_follow VALUES ('%s','%s')
+            """ % (self_user_id,to_follow_id)
+    execute_sql(query)
+    print (self_user_id, "is following user", to_follow_id)
     return
 def unfollow_user():
     return
@@ -238,48 +244,62 @@ def purchase_song(user_id,song_id):
     wallet ="""
             select wallet from user WHERE (user.id = '%s')
             """ % (user_id)
-    wallet_ = execute_sql(wallet)
+    wallet_ = execute_sql(wallet)[0]
     song_price =    """
                     select price from song WHERE (song.id = '%s')
                     """ % (song_id)
-    song_price_ = execute_sql(song_price)
-    if song_price_ > wallet_:
-        print("PMVY")
-        return None
-    else:
-        newwallet = wallet_ - song_price_
-        update_query =  """
-                        update user set wallet = %s WHERE (user.id = '%s')
-                        """ %(newwallet,user_id)
-        execute_sql(update_query)
-        song_user_query = """
-                          insert into user_song
-                          VALUES ('%s','%s')
-                          """ % ( user_id, song_id )
-        execute_sql(song_user_query)
+    song_price_ = execute_sql(song_price)[0]
+    try:
+        if song_price_ > wallet_:
+            print("PMVY")
+            return ("Insufficient money!")
+        else:
+            song_user_query = """
+                              insert into user_song
+                              VALUES ('%s','%s')
+                              """ % ( user_id, song_id )
+            execute_sql(song_user_query)
+            newwallet = wallet_ - song_price_
+            update_query =  """
+                            update user set wallet = %s WHERE (user.id = '%s')
+                            """ %(newwallet,user_id)
+            execute_sql(update_query)
+
+    except pymysql.IntegrityError as e:
+        if (e.args[0] == 1062):
+            print("User ", user_id, " has already purchased song ", song_id)
+            return ("User ", user_id, " has already purchased song ", song_id)
+
 def purchase_album(user_id,album_id):
     wallet ="""
             select wallet from user WHERE (user.id = '%s')
             """ % (user_id)
-    wallet_ = execute_sql(wallet)
+    wallet_ = execute_sql(wallet)[0]
     album_price =    """
                     select price from album WHERE (album.id = '%s' )
                     """ % (album_id)
-    album_price_ = execute_sql(album_price)
-    if album_price_ > wallet_:
-        print("PMVY")
-        return None
-    else:
-        newwallet = wallet_ - album_price_
-        update_query =  """
-                        update user set wallet = %s WHERE (user.id = '%s')
-                        """ %(newwallet,user_id)
-        execute_sql(update_query)
-        album_user_query = """
-                          insert into user_album
-                          VALUES ('%s','%s')
-                          """ % ( user_id, album_id)
-        execute_sql(album_user_query)
+    album_price_ = execute_sql(album_price)[0]
+    try:
+        if album_price_ > wallet_:
+            print("PMVY")
+            return ("Insufficient money!")
+        else:
+            album_user_query = """
+                              insert into user_album
+                              VALUES ('%s','%s')
+                              """ % ( user_id, album_id)
+            execute_sql(album_user_query)
+            newwallet = wallet_ - album_price_
+            update_query =  """
+                            update user set wallet = %s WHERE (user.id = '%s')
+                            """ %(newwallet,user_id)
+            execute_sql(update_query)
+            print("Payment is done")
+    except pymysql.IntegrityError as e:
+        if(e.args[0] == 1062):
+            print ("User ", user_id, " has already purchased album ", album_id)
+            return ("User ", user_id, " has already purchased album ", album_id)
+
 def add_money_to_wallet(user_id,money):
     wallet ="""
             select wallet from user WHERE (user.id = '%s')
@@ -387,6 +407,14 @@ def get_albums_by_most_listened():
         res.append(a)
 
     return res
+def get_followings(user_id):
+    query = """select u2.* from user u1, user u2, user_follow f WHERE (u1.id = '%s' and '%s' = f.follower_id and u2.id = f.following_id)
+            """ % (user_id,user_id)
+    followings = execute_sql(query,1)
+    print("followers of user : ",user_id,"\n", followings)
+def timeline_message(self_user_id):
+    return
+
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
@@ -398,4 +426,5 @@ def get_albums_by_most_listened():
 #create_song("Dont Cry", dt.datetime(1991,1,1), time.strftime("%M%S",time.gmtime(284)), 3, 5, 2)
 #create_artist('esda@dasadsda','isim','ast','male','ushsarkierer',"pass",'3',dt.datetime(2000,2,1))
 #create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105,'rock')
-rate_song(108,4,5)
+#rate_song(108,4,5)
+purchase_album(86,2)
