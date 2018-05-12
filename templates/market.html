@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../static/theme.css" type="text/css">
+  <link rel="stylesheet" href="../static/primeuı/themes/afterdark/theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <link rel="stylesheet" href="../static/primeuı/primeui-all.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src= "../static/primeuı/primeui-all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x-tag/1.5.11/x-tag-core.min.js"></script>
+    <script type="text/javascript" src="../static/primeuı/primeelements.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="col-md-2">
+      <div class="col-md-3">
+        <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"> </div>
+      <div class="col-md-9">
+        <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="container">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="market">Market</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="mysongs">My Songs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="timeline">Timeline</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="playlists">Playlists</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="events">Events</a>
+              </li>
+            </ul>
+            <div class="row">
+              <div class="col-md-10">
+                <form class="form-inline m-0">
+                  <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
+                  <button class="btn btn-secondary" type="submit">Search</button>
+                </form>
+              </div>
+              <div class="col-md-2">
+                <label class="text-center text-secondary"> UserName </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <template id="template">
+        {% raw %}
+    <div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+            <span class="ui-panel-title">{{vin}}</span>
+        </div>
+        <div class="ui-panel-content ui-widget-content">
+            <img src="../static/logo.png" height="64" width="64">
+            <div class="car-detail">{{year}} - {{color}}</div>
+        </div>
+    </div>
+        {% endraw %}
+    </template>
+    <div id="albumgrid"></div>
+    <div id="songgrid"></div>
+    <script>
+        $(function() {
+    $('#albumgrid').puidatagrid({
+        paginator: {
+            rows: 5
+        },
+        columns: 5,
+        template: $('#template'),
+        header: 'Most Popular Albums',
+        datasource: [
+            {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
+            {'brand': 'Audi', 'year': 2011, 'color': 'Black', 'vin': 'gwregre345'},
+            {'brand': 'Renault', 'year': 2005, 'color': 'Gray', 'vin': 'h354htr'},
+            {'brand': 'BMW', 'year': 2003, 'color': 'Blue', 'vin': 'j6w54qgh'},
+            {'brand': 'Ford', 'year': 1995, 'color': 'White', 'vin': 'hrtwy34'},
+            {'brand': 'Fiat', 'year': 2005, 'color': 'Black', 'vin': 'jejtyj'},
+            {'brand': 'Honda', 'year': 2012, 'color': 'Yellow', 'vin': 'g43gr'},
+            {'brand': 'Volvo', 'year': 2013, 'color': 'White', 'vin': 'greg34'},
+            {'brand': 'Ford', 'year': 2000, 'color': 'Black', 'vin': 'h54hw5'},
+            {'brand': 'BMW', 'year': 2013, 'color': 'Red', 'vin': '245t2s'},
+            {'brand': 'Jaguar', 'year': 2011, 'color': 'Blue', 'vin': 'few234'},
+            {'brand': 'Ford', 'year': 2010, 'color': 'White', 'vin': 'bfnt23'},
+        ]
+    });
+    $('#songgrid').puidatagrid({
+        paginator: {
+            rows: 5
+        },
+        columns: 5,
+        template: $('#template'),
+        header: 'Most Popular Songs',
+        datasource: [
+            {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
+            {'brand': 'Audi', 'year': 2011, 'color': 'Black', 'vin': 'gwregre345'},
+            {'brand': 'Renault', 'year': 2005, 'color': 'Gray', 'vin': 'h354htr'},
+            {'brand': 'BMW', 'year': 2003, 'color': 'Blue', 'vin': 'j6w54qgh'},
+            {'brand': 'Ford', 'year': 1995, 'color': 'White', 'vin': 'hrtwy34'},
+            {'brand': 'Fiat', 'year': 2005, 'color': 'Black', 'vin': 'jejtyj'},
+            {'brand': 'Honda', 'year': 2012, 'color': 'Yellow', 'vin': 'g43gr'},
+            {'brand': 'Volvo', 'year': 2013, 'color': 'White', 'vin': 'greg34'},
+            {'brand': 'Ford', 'year': 2000, 'color': 'Black', 'vin': 'h54hw5'},
+            {'brand': 'BMW', 'year': 2013, 'color': 'Red', 'vin': '245t2s'},
+            {'brand': 'Jaguar', 'year': 2011, 'color': 'Blue', 'vin': 'few234'},
+            {'brand': 'Ford', 'year': 2010, 'color': 'White', 'vin': 'bfnt23'},
+        ]
+    });
+    });
+    </script>
+
+</body>
+
+</html>
