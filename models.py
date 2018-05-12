@@ -43,11 +43,12 @@ class Playlist:
 
 class Album:
 
-    def __init__(self, album_id, title, release_date, price):
+    def __init__(self, album_id, title, release_date, price, artist):
         self.album_id = album_id
         self.title = title
         self.release_date = release_date
         self.price = price
+        self.artist = artist
 
 
 class Event:

@@ -378,14 +378,15 @@ def get_albums_by_most_listened():
         return res
 
     for album_it in album_ids:
-        sql = "SELECT * FROM album WHERE id = '%s'" % album_it[0]
+        sql = "SELECT a.*, u.name " \
+              "FROM album a join song s on a.id = s.album_id join artist_song a_s join user u " \
+              "WHERE a_s.song_id = s.id and a_s.user_id = u.id and a.id = '%s'" % album_it[0]
         albm = execute_sql(sql)
 
-        a = Album( albm[0], albm[1], albm[2], albm[3] )
+        a = Album( albm[0], albm[1], albm[2], albm[3], albm[4] )
         res.append(a)
 
     return res
-
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 #remove_user(1)
