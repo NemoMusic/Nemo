@@ -5,7 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../static/bottom.css" type="text/css">
   <link rel="stylesheet" href="../static/theme.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
   <link rel="stylesheet" href="../static/primeuı/themes/afterdark/theme.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
@@ -17,61 +25,63 @@
     <script type="text/javascript" src="../static/primeuı/primeelements.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 </head>
-
-
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <div class="col-md-2">
-      <div class="col-md-3">
-        <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"> </div>
-      <div class="col-md-9">
-        <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
+  <hr>
+  <div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+      <div class="col-md-2">
+        <div class="col-md-3">
+          <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"> </div>
+        <div class="col-md-9">
+          <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
+        </div>
       </div>
-    </div>
-    <div class="col-md-10">
-      <div class="row">
-        <div class="container">
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="profile">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="market">Market</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="mysongs">My Songs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="timeline">Timeline</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="playlists">Playlists</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="events">Events</a>
-              </li>
-            </ul>
-            <div class="row">
-              <div class="col-md-10">
-                <form class="form-inline m-0">
-                  <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
-                  <button class="btn btn-secondary" type="submit">Search</button>
-                </form>
-              </div>
-              <div class="col-md-2">
-                <label class="text-center text-secondary"> UserName </label>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/market">Market</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/mysongs">My Songs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/timeline">Timeline</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/playlists">Playlists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/events">Events</a>
+                </li>
+              </ul>
+              <div class="row">
+                <div class="col-md-10">
+                  <form class="form-inline m-0">
+                    <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                  </form>
+                </div>
+                <div class="col-md-2">
+                  <label class="text-center text-secondary" href="/logout"> Logout </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
-        {% raw %}
+    </nav>
+  </div>
+  <hr>
+  {% raw %}
   <template id="song-template">
     <div class="ui-panel ui-widget ui-widget-content ui-corner-all">
         <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
@@ -148,9 +158,81 @@
             {'brand': 'Ford', 'year': 2010, 'color': 'White', 'vin': 'bfnt23'},
         ]
     });
+
+    $(".rating input:radio").attr("checked", false);
+    
+        $('.rating input').click(function () {
+            $(".rating span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+    
+        $('input:radio').change(
+          function(){
+            var userRating = this.value;
+            alert("You give the rating " + userRating + "/5");
+        }); 
     });
     </script>
-
+  <hr>
+  <div class="py-3 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="../static/kayahan.jpg" alt="ImageMusic" style="width:70px;height:70px;"> </div>
+            <div class="col-md-6">
+              <div class="row">
+                <p id="songName"> Bir Yemin Ettim ki </p>
+              </div>
+              <div name="song_artist" class="row">
+                <p id="artistName"> Kayahan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 d-flex justify-content-center">
+          <div class="row" width="40px">
+            <audio src="../Docs/kayahan.mp3" controls="" id="myMusic">
+              <p>Fallback content goes here.</p>
+            </audio>
+          </div>
+        </div>
+        <div class="col-md-3" draggable="true">
+          <div class="row d-flex justify-content-center">
+            <div class="rating">
+              <span>
+                <input type="radio" name="rating" id="str5" value="5">
+                <label for="str5"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str4" value="4">
+                <label for="str4"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str3" value="3">
+                <label for="str3"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str2" value="2">
+                <label for="str2"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str1" value="1">
+                <label for="str1"></label>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p id="ratingText">Rating</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
 </body>
 
 </html>
