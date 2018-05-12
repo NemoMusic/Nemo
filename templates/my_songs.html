@@ -1,59 +1,194 @@
-<!DOCTYPE html> 
-<html> 
- 
-<head> 
-  <meta charset="utf-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"> 
-  <link rel="stylesheet" href="../static/theme.css" type="text/css"> </head>
- 
-<body> 
-  <div class="row"> 
-    <object type="text/html" data="top_menu.html"></object> 
-    <iframe src="../templates/top_menu.html" width="110%" height="130px"></iframe> 
-  </div> 
-  <div class="bg-primary py-2"> 
-    <div class="container"> 
-      <div class="row"> 
-        <div class="col-md-12"> 
-          <h1 class="">My Songs</h1> 
-        </div> 
-      </div> 
-    </div> 
-  </div> 
-  <div class="py-5 bg-secondary"> 
-    <div class="container"> 
-      <div class="row"> 
-        <div class="col-md-12 bg-primary"> 
-          <table class="table"> 
-            <thead> 
-              <tr> 
-                <th class="text-secondary">First Name</th> 
-                <th class="text-secondary">Last Name</th> 
-              </tr> 
-            </thead> 
-            <tbody> 
-              <tr> 
-                <td class="text-light">Mark</td> 
-                <td class="text-light">Otto</td> 
-              </tr> 
-              <tr> 
-                <td class="text-light">Jacob</td> 
-                <td class="text-light">Thornton</td> 
-              </tr> 
-              <tr> 
-                <td class="text-light">Larry</td> 
-                <td class="text-light">the Bird</td> 
-              </tr> 
-            </tbody> 
-          </table> 
-        </div> 
-      </div> 
-    </div> 
-  </div> 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body> 
- 
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../static/bottom.css" type="text/css">
+  <link rel="stylesheet" href="../static/theme.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+
+<body>
+  <hr>
+  <div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+      <div class="col-md-2">
+        <div class="col-md-3">
+          <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"> </div>
+        <div class="col-md-9">
+          <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/market">Market</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/mysongs">My Songs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/timeline">Timeline</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/playlists">Playlists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/events">Events</a>
+                </li>
+              </ul>
+              <div class="row">
+                <div class="col-md-10">
+                  <form class="form-inline m-0">
+                    <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                  </form>
+                </div>
+                <div class="col-md-2">
+                  <label class="text-center text-secondary" href="/logout"> Logout </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <hr>
+  <div>
+    <script>
+      $(document).ready( function () {
+        $('#example').DataTable();
+      } );
+  </script>
+  <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Play</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Duration</th>
+                <th>Genre</th>
+                <th>Number of Listen</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for song in songs %}
+            <tr>
+                <td><img src="../static/play.png" alt="Play" height="24" width="24"></td>
+                <td data-search="{{song.title}}">{{song.title}}</td>
+                <td>{{song.artist_name}}</td>
+                <td>{{song.duration}}</td>
+                <td>{{song.genre[0]}}</td>
+                <td>{{song.number_of_listen}}</td>
+                <td><img src="../static/delete.png" alt="Delete" height="24" width="24"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  <hr>
+  <div class="py-3 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="../static/kayahan.jpg" alt="ImageMusic" style="width:70px;height:70px;"> </div>
+            <div class="col-md-6">
+              <div class="row">
+                <p id="songName"> Bir Yemin Ettim ki </p>
+              </div>
+              <div name="song_artist" class="row">
+                <p id="artistName"> Kayahan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 d-flex justify-content-center">
+          <div class="row" width="40px">
+            <audio src="../Docs/kayahan.mp3" controls="" id="myMusic">
+              <p>Fallback content goes here.</p>
+            </audio>
+          </div>
+        </div>
+        <div class="col-md-3" draggable="true">
+          <div class="row d-flex justify-content-center">
+            <div class="rating">
+              <span>
+                <input type="radio" name="rating" id="str5" value="5">
+                <label for="str5"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str4" value="4">
+                <label for="str4"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str3" value="3">
+                <label for="str3"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str2" value="2">
+                <label for="str2"></label>
+              </span>
+              <span>
+                <input type="radio" name="rating" id="str1" value="1">
+                <label for="str1"></label>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p id="ratingText">Rating</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"></script>
+  <script>
+    var vid = document.getElementById("myMusic");
+		vid.style.width = '600px';
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        // Check Radio-box
+        $(".rating input:radio").attr("checked", false);
+    
+        $('.rating input').click(function () {
+            $(".rating span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+    
+        $('input:radio').change(
+          function(){
+            var userRating = this.value;
+            alert("You give the rating " + userRating + "/5");
+        }); 
+    });
+  </script>
+</body>
+
 </html>
