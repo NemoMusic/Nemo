@@ -14,6 +14,7 @@ connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com
 def execute_sql(sql, type=0):
     cursor = connection.cursor()
     cursor.execute(sql)
+    connection.commit()
     if type:
         return cursor.fetchall()
     return cursor.fetchone()
@@ -201,12 +202,14 @@ def unfollow_playlist():
     return
 # kerem ayoz
 def rate_song(user_id, song_id, value):
-    act_id = create_activity(dt.datetime.now(),song,rate,user_id)
+    act_id = create_activity(dt.datetime.now(),song,rate,user_id,song_id)
+    print("in rate song act id = ", act_id)
     query = """
             insert into rate
             VALUES ('%s' ,'%s')
             """ % (act_id,value)
     execute_sql(query)
+    print ("executed")
 def rate_playlist():
     return
 def rate_album():
@@ -287,14 +290,15 @@ def add_money_to_wallet(user_id,money):
                     update user set wallet = %s WHERE (user.id = '%s')
                     """ %(newwallet,user_id)
     execute_sql(update_query)
-def create_activity(date,ent_type,act_type,user_id):
+def create_activity(date,ent_type,act_type,user_id,entity_id):
     query = """
             insert into activity
-            VALUES (DEFAULT,'%s','%s','%s','%s')
-            """ % (date,ent_type,act_type,user_id)
+            VALUES (DEFAULT,'%s','%s','%s','%s','%s')
+            """ % (date,ent_type,act_type,user_id,entity_id)
     cursor = connection.cursor()
-    execute_sql(query)
+    cursor.execute(query)
     activity_id = cursor.lastrowid
+    print(activity_id)
     return activity_id
 # ali bulut
 def share_song():
@@ -393,3 +397,4 @@ def get_albums_by_most_listened():
 #create_song("Dont Cry", dt.datetime(1991,1,1), time.strftime("%M%S",time.gmtime(284)), 3, 5, 2)
 #create_artist('esda@dasadsda','isim','ast','male','ushsarkierer',"pass",'3',dt.datetime(2000,2,1))
 #create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105,'rock')
+rate_song(108,4,5)
