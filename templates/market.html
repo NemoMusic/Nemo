@@ -71,19 +71,33 @@
       </div>
     </div>
   </nav>
-    <template id="template">
         {% raw %}
+  <template id="song-template">
     <div class="ui-panel ui-widget ui-widget-content ui-corner-all">
         <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
-            <span class="ui-panel-title">{{vin}}</span>
+            <span class="ui-panel-title">{{title}}</span>
         </div>
         <div class="ui-panel-content ui-widget-content">
             <img src="../static/logo.png" height="64" width="64">
-            <div class="car-detail">{{year}} - {{color}}</div>
+            <div class="car-detail">{{price}}</div>
+            <a class="nav-link text-secondary" href="/buysongs?id={{id}}">Buy</a>
         </div>
     </div>
+  </template>
+  <template id="album-template">
+    <div class="ui-panel ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all">
+            <span class="ui-panel-title">{{title}}</span>
+        </div>
+        <div class="ui-panel-content ui-widget-content">
+            <img src="../static/logo.png" height="64" width="64">
+            <div class="car-detail">{{price}}</div>
+            <a class="nav-link text-secondary" href="/buyalbum?id={{id}}">Buy</a>
+        </div>
+    </div>
+  </template>
         {% endraw %}
-    </template>
+
     <div id="albumgrid"></div>
     <div id="songgrid"></div>
     <script>
@@ -93,7 +107,7 @@
             rows: 5
         },
         columns: 5,
-        template: $('#template'),
+        template: $('#song-template'),
         header: 'Most Popular Albums',
         datasource: [
             {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
@@ -115,7 +129,7 @@
             rows: 5
         },
         columns: 5,
-        template: $('#template'),
+        template: $('#album-template'),
         header: 'Most Popular Songs',
         datasource: [
             {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
