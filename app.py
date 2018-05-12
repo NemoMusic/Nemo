@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a27'
 @app.route('/')
 def hello():
     if 'user_id' in session:
-        return render_template('my_songs2.html',songs = db_methods.get_songs_of_users(int(session['user_id'])))
+        return render_template('my_songs.html',songs = db_methods.get_songs_of_users(int(session['user_id'])))
     else:
         return redirect('/login')
 
@@ -27,7 +27,7 @@ def loginSignin():
     if login:
         session['user_id'] = login
         print(session['user_id'])
-        return render_template('my_songs2.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
+        return render_template('my_songs.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
     else:
         return render_template('login.html',message1 ="Email or Password Incorrect")
 
@@ -44,14 +44,14 @@ def signIn():
     signIn = db_methods.create_user(email,name,lastname,gender,username,password,0,dt.datetime(2000,2,3))
     if signIn:
         session['user_id'] = str(signIn)
-        return render_template('my_songs2.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
+        return render_template('my_songs.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
     else:
         return render_template('login.html', message2 ="Username or Email Exist")
 
 
 @app.route('/mysongs')
 def mySons():
-    return render_template('my_songs2.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
+    return render_template('my_songs.html', songs = db_methods.get_songs_of_users(int(session['user_id'])))
 
 
 @app.route('/market')
