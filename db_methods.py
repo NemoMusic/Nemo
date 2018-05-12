@@ -322,6 +322,9 @@ def get_songs_of_users( user_id ):
     print("----", song_ids)
     res = []
 
+    if song_ids == None:
+        return res
+
     for song_it in song_ids:
 
         sql = "SELECT * FROM song WHERE id = '%s'" % song_it
