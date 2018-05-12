@@ -124,12 +124,12 @@ def remove_artist(id):
 '''
     :return created song id
 '''
-def create_song(title,release_date,duration,number_of_listen,price,album_id,artist_id):
+def create_song(title,release_date,duration,number_of_listen,price,album_id,artist_id,genre):
     query = """
             insert into song
             VALUES
-            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s')
-            """ % ( title,release_date,duration,number_of_listen,price,album_id )
+            (DEFAULT, '%s', '%s', '%s', '%s', '%s', '%s','%s')
+            """ % ( title,release_date,duration,number_of_listen,price,album_id,genre )
     cursor = connection.cursor()
     cursor.execute(query)
     connection.commit()
@@ -354,4 +354,4 @@ def get_songs_of_users( user_id ):
 #create_album("Use Your Illusion", dt.datetime(1991,1,1), 20)
 #create_song("Dont Cry", dt.datetime(1991,1,1), time.strftime("%M%S",time.gmtime(284)), 3, 5, 2)
 #create_artist('esda@dasadsda','isim','ast','male','ushsarkierer',"pass",'3',dt.datetime(2000,2,1))
-#create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105)
+#create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105,'rock')
