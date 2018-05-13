@@ -159,7 +159,7 @@
             },
             columns: 5,
             template: $('#song-template'),
-            header: 'Songs with {{search-key}}',
+            header: 'Songs with {{search_key}}',
             datasource: [
         {% for song in songs %}
             {% raw %}
@@ -182,7 +182,7 @@
             },
             columns: 5,
             template: $('#album-template'),
-            header: 'Albums with {{search-key}}',
+            header: 'Albums with {{search_key}}',
             datasource: [
                 {% for album in albums %}
                     {% raw %}
@@ -204,7 +204,7 @@
             },
             columns: 5,
             template: $('#user-template'),
-            header: 'Users with {{search-key}}',
+            header: 'Users with {{search_key}}',
             datasource: [
                 {% for user in users %}
                     {% raw %}
@@ -224,7 +224,7 @@
             },
             columns: 5,
             template: $('#event-template'),
-            header: 'Events with {{search-key}}',
+            header: 'Events with {{search_key}}',
             datasource: [
                 {% for event in events %}
                     {% raw %}

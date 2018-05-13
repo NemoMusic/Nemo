@@ -83,6 +83,7 @@ def buyalbum():
     else:
         return redirect('/')
 
+
 @app.route('/buysong', methods=["POST", "GET"])
 def buysong():
     if authcheck():
@@ -92,12 +93,26 @@ def buysong():
     else:
         return redirect('/')
 
+
 @app.route('/timeline')
 def timeline():
     if authcheck():
         return render_template('timeline.html')
     else:
         return redirect('/')
+
+@app.route('/search', methods=["POST", "GET"])
+def search():
+    if authcheck():
+        searchkey = request.args.get('key')
+        songs = db_methods.search_song(searchkey)
+        albums = db_methods.search_album(searchkey)
+        events = db_methods.search_events(searchkey)
+        users = db_methods.search_user(searchkey)
+        return render_template('aftersearch.html',users=users, songs= songs, albums=albums, events=events, search_key=searchkey)
+    else:
+        return redirect('/')
+
 
 @app.route('/logout')
 def logout():

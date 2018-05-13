@@ -602,7 +602,7 @@ def search_playlist(playlisttitle):
 
 
 def search_events(eventtitle):
-    query = "select * from event e where e.title like '%" + eventtitle + "%'"
+    query = "select * from event e where e.name like '%" + eventtitle + "%'"
     events_tuple = execute_sql(query,1)
     events = []
     for i in range(len(events_tuple)) :
