@@ -17,12 +17,12 @@ class Artist:
         self.account_validation_date = account_validation_date
 
 
-# Genre is a seperate table in db but added into a Song in class diagram because it has no other function
+# Genre is a separate table in db but added into a Song in class diagram because it has no other function
 class Song:
 
     def __init__(self, song_id = None, title = None, release_date =None, duration =None,
                  number_of_listen =None, price =None, album_id = None, genre =None,
-                 artist_name =None, album_name =None):
+                 artist_name =None, album_name =None, rate=None):
         self.song_id = song_id
         self.title = title
         self.release_date = release_date
@@ -33,6 +33,7 @@ class Song:
         self.genre = genre
         self.artist_name = artist_name
         self.album_name = album_name
+        self.rate = rate
 
 
 class Playlist:
@@ -46,12 +47,13 @@ class Playlist:
 
 class Album:
 
-    def __init__(self, album_id, title, release_date, price, artist):
+    def __init__(self, album_id, title, release_date, price, artist, rate=None):
         self.album_id = album_id
         self.title = title
         self.release_date = release_date
         self.price = price
         self.artist = artist
+        self.rate = rate
 
 
 class Event:
