@@ -1,7 +1,7 @@
 import pymysql
 import datetime as dt
 import time
-import models
+
 
 from models import *
 
@@ -534,15 +534,32 @@ def get_album_by_rate():
 
 
 def get_followings(user_id):
-    query = """select u2.* from user u1, user u2, user_follow f WHERE (u1.id = '%s' and '%s' = f.follower_id and u2.id = f.following_id)
-            """ % (user_id, user_id)
+    query = """select following.* from user following, user_follow f WHERE ('%s' = f.follower_id and following.id = f.following_id)
+            """ % (user_id)
     followings = execute_sql(query, 1)
     print("followers of user : ", user_id, "\n", followings)
 
 
 def timeline_message(user_id):
-
-    return
+    query = """
+            select  a.id, a.user_id, following.user_name, a.date, a.entity_type, a.entity_id, a.action_type,
+            case a.action_type
+              WHEN '%s' THEN '%s'
+              WHEN '%s' THEN share.share_comment
+              WHEN '%s' THEN comment.text
+              WHEN '%s' THEN rate.value
+            END
+            FROM user following JOIN user_follow uf JOIN activity a
+            LEFT OUTER JOIN follow ON (a.id = follow.activity_id)
+            LEFT OUTER JOIN rate on (a.id = rate.activity_id) 
+            LEFT OUTER JOIN share ON (a.id = share.activity_id)
+            LEFT OUTER JOIN comment ON (a.id = comment.activity_id)
+            WHERE ('%s' = uf.follower_id and following.id = uf.following_id and a.user_id = following.id)
+            """ %(follow,user_id,share,comment_a,rate,user_id)
+    message = execute_sql(query,1)
+    for i in range(len(message)):
+        print(message[i])
+    return message
 
 
 def search_user(username):
@@ -571,7 +588,7 @@ def search_album(albumtitle):
     albums_tuple = execute_sql(query,1)
     albums = []
     for i in range(len(albums_tuple)) :
-        albums.append(Album(album_id= songs_tuple[i][0], title= songs_tuple[i][1], price=songs_tuple[i][3]))
+        albums.append(Album(album_id= albums_tuple[i][0], title= albums_tuple[i][1], price= albums_tuple[i][3]))
     return albums
 
 
@@ -605,4 +622,5 @@ def search_events(eventtitle):
 # create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105,'rock')
 # rate_song(108,4,5)
 #purchase_album(86, 2)
-search_song("cry")
+#search_song("cry")
+#timeline_message(10)
