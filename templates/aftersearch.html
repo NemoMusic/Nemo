@@ -30,7 +30,8 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 </head>
 <body>
-<div>
+    <hr>
+<div id="topmenu" style="top: 0">
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
         <div class="col-md-2">
             <div class="col-md-3">
@@ -85,6 +86,7 @@
         </div>
     </nav>
 </div>
+<hr>
 {% raw %}
 <template id="event-template">
     <div class="ui-panel ui-widget ui-widget-content ui-corner-all">
@@ -254,7 +256,8 @@
             });
     });
 </script>
-<div class="py-3 bg-primary">
+<hr>
+<div id="bottommenu" class="py-3 bg-primary" style="position: fixed; bottom: 0; left: 0; right: 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -312,6 +315,7 @@
         </div>
     </div>
 </div>
+<hr>
 </body>
 
 </html>

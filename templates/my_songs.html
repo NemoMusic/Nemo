@@ -2,81 +2,77 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css">
-    <link rel="stylesheet" href="../static/theme.css" type="text/css">
-    <link rel="stylesheet" href="../static/bottom.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
-    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../static/theme.css" type="text/css">
+  <link rel="stylesheet" href="../static/bottom.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
 </head>
 
 <body>
-<div>
+  <hr>
+  <div id="topmenu" style="top: 0">
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-        <div class="col-md-2">
-            <div class="col-md-3">
-                <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"></div>
-            <div class="col-md-9">
-                <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
-            </div>
+      <div class="col-md-2">
+        <div class="col-md-3">
+          <img src="../static/logo.png" alt="Mountain View" style="width:70px;height:70px;"> </div>
+        <div class="col-md-9">
+          <a class="navbar-brand text-secondary" href="#">Nemo Music</a>
         </div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="container">
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/profile">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/market">Market</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/mysongs">My Songs</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/timeline">Timeline</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/playlists">Playlists</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-secondary" href="/events">Events</a>
-                            </li>
-                        </ul>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <form class="form-inline m-0">
-                                    <input class="form-control mr-2 form-control-sm" type="text"
-                                           placeholder="Songs,Albums,Artists" required="required">
-                                    <button class="btn btn-secondary" type="submit">Search</button>
-                                </form>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="text-center text-secondary" href="/logout"> Logout </a>
-                            </div>
-                        </div>
-                    </div>
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/market">Market</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/mysongs">My Songs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/timeline">Timeline</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/playlists">Playlists</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-secondary" href="/events">Events</a>
+                </li>
+              </ul>
+              <div class="row">
+                <div class="col-md-10">
+                  <form class="form-inline m-0">
+                    <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                  </form>
                 </div>
+                <div class="col-md-2">
+                  <a class="text-center text-secondary" href="/logout"> Logout </a>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </nav>
-</div>
-
-<script>
+  </div>
+  <hr>
+  <script>
     $(document).ready(function () {
 
         $('#example').DataTable();
@@ -96,10 +92,10 @@
             });
 
     });
-</script>
-<table id="example" class="display" style="width:100%">
+  </script> {% for song in songs %} {% endfor %}
+  <table id="example" class="display" style="width:100%">
     <thead>
-    <tr>
+      <tr>
         <th>Play</th>
         <th>Title</th>
         <th>Artist</th>
@@ -107,85 +103,86 @@
         <th>Genre</th>
         <th>Number of Listen</th>
         <th>Delete</th>
-    </tr>
+      </tr>
     </thead>
     <tbody>
-    {% for song in songs %}
-    <tr>
-        <td><img src="../static/play.png" alt="Play" height="24" width="24"></td>
+      <tr>
+        <td>
+          <img src="../static/play.png" alt="Play" height="24" width="24"> </td>
         <td data-search="{{song.title}}">{{song.title}}</td>
         <td>{{song.artist_name}}</td>
         <td>{{song.duration}}</td>
         <td>{{song.genre}}</td>
         <td>{{song.number_of_listen}}</td>
-        <td><img src="../static/delete.png" alt="Delete" height="24" width="24"></td>
-    </tr>
-    {% endfor %}
+        <td>
+          <img src="../static/delete.png" alt="Delete" height="24" width="24"> </td>
+      </tr>
     </tbody>
-</table>
-
-<div class="py-3 bg-primary">
+  </table>
+  <hr>
+  <div id="bottommenu" class="py-3 bg-primary" style="position: fixed; bottom: 0; left: 0; right: 0;">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="../static/kayahan.jpg" alt="ImageMusic" style="width:70px;height:70px;"></div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <p id="songName"> Bir Yemin Ettim ki </p>
-                        </div>
-                        <div name="song_artist" class="row">
-                            <p id="artistName"> Kayahan</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="../static/kayahan.jpg" alt="ImageMusic" style="width:70px;height:70px;"> </div>
+            <div class="col-md-6">
+              <div class="row">
+                <p id="songName"> Bir Yemin Ettim ki </p>
+              </div>
+              <div class="row" name="song_artist">
+                <p id="artistName"> Kayahan</p>
+              </div>
             </div>
-            <div class="col-md-5 d-flex justify-content-center">
-                <div class="row" width="40px">
-                    <audio src="../Docs/kayahan.mp3" controls="" id="myMusic">
-                        <p>Fallback content goes here.</p>
-                    </audio>
-                </div>
-            </div>
-            <div class="col-md-3" draggable="true">
-                <div class="row d-flex justify-content-center">
-                    <div class="rating">
+          </div>
+        </div>
+        <div class="col-md-5 d-flex justify-content-center">
+          <div class="row" width="40px">
+            <audio src="../Docs/kayahan.mp3" controls="" id="myMusic">
+              <p>Fallback content goes here.</p>
+            </audio>
+          </div>
+        </div>
+        <div class="col-md-3" draggable="true">
+          <div class="row d-flex justify-content-center">
+            <div class="rating">
               <span>
                 <input type="radio" name="rating" id="str5" value="5">
                 <label for="str5"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str4" value="4">
                 <label for="str4"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str3" value="3">
                 <label for="str3"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str2" value="2">
                 <label for="str2"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str1" value="1">
                 <label for="str1"></label>
               </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p id="ratingText">Rating</p>
-                    </div>
-                </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p id="ratingText">Rating</p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<script>
+  </div>
+  <script>
     var vid = document.getElementById("myMusic");
     vid.style.width = '600px';
-</script>
+  </script>
+<hr>
 </body>
 
 </html>
