@@ -205,6 +205,20 @@ create_table_song_genre = """create table song_genre(
             foreign key(genre_name) references genre(name)
             on delete cascade on update cascade) engine = INNODB;"""
 
+create_view_song_rate = """create view song_rate as 
+            SELECT s.id as song_id, avg(r.value) as rate
+            FROM song s join activity a join rate r
+            WHERE a.action_type = 'RATE' and a.entity_type = 'SONG' and r.activity_id = a.id and a.entity_id = s.id
+            GROUP BY s.id"""
+
+create_view_album_rate = """create view album_rate as
+            SELECT a.id album_id, avg(r.value) as rate
+            FROM album a join activity ac join rate r
+            WHERE ac.action_type = 'RATE' and ac.entity_type = 'ALBUM' and r.activity_id = a.id and ac.entity_id = a.id
+            GROUP BY a.id"""
+
+# execute_sql(create_view_album_rate)
+# execute_sql(create_view_song_rate)
 # execute_sql(create_user_table)
 # execute_sql(create_event_table)
 # execute_sql(create_artist_table)

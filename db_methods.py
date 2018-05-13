@@ -492,6 +492,47 @@ def get_albums_by_most_listened():
     return res
 
 
+def get_songs_by_rate():
+    sql = "SELECT song_id FROM song_rate "
+    songs = execute_sql(sql,1)
+
+    res = []
+
+    if songs == None:
+        return res
+
+    for sng_it in songs:
+        sql = "SELECT s.*, u.name, al.title, sr.rate  " \
+              "FROM song s join artist_song a join user u join album al join song_rate sr " \
+              "WHERE s.id = '%s' and a.song_id = s.id and al.id = s.album_id and a.user_id=u.id and sr.song_id = s.id" % sng_it[0]
+        sng = execute_sql(sql)
+
+        s = Song(sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], sng[8], sng[9], sng[10])
+        res.append(s)
+
+    return res
+
+
+def get_album_by_rate():
+    sql = "SELECT album_id FROM album_rate"
+    albums = execute_sql(sql,1)
+    res = []
+
+    if albums == None:
+        return res
+
+    for albm_it in albums:
+        sql = "SELECT a.*, u.name, ar.rate " \
+              "FROM album a join user u join album_rate ar join artist_song ars join song s " \
+              "WHERE a.id = '%s' and a.id = ar.album_id and s.album_id = a.id and u.id = ars.user_id " % albm_it[0]
+        albm = execute_sql(sql)
+
+        a = Album( albm[0], albm[1], albm[2], albm[3], albm[4], albm[5] )
+        res.append(a)
+
+    return res
+
+
 def get_followings(user_id):
     query = """select u2.* from user u1, user u2, user_follow f WHERE (u1.id = '%s' and '%s' = f.follower_id and u2.id = f.following_id)
             """ % (user_id, user_id)
