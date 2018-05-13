@@ -3,7 +3,7 @@ import datetime as dt
 import time
 import models
 
-from models import Song, Album
+from models import *
 
 connection = None
 
@@ -504,6 +504,54 @@ def timeline_message(user_id):
     return
 
 
+def search_user(username):
+    query = "select * from user u where (u.user_name like '%" +username + "%')"
+    users_tuple = execute_sql(query,1)
+    users = []
+
+    for i in range(len(users_tuple)) :
+        users.append(User(user_id= users_tuple[i][0], username= users_tuple[i][5]))
+    return users
+
+
+def search_song(songtitle):
+    query = "select * from song s where (s.title like '%" +songtitle + "%')"
+    songs_tuple = execute_sql(query,1)
+    songs = []
+    for i in range(len(songs_tuple)) :
+        songs.append(Song(song_id= songs_tuple[i][0], title= songs_tuple[i][1], price=songs_tuple[i][5],
+                     genre= songs_tuple[i][7]))
+    print(songs_tuple)
+    return songs
+
+
+def search_album(albumtitle):
+    query = "select * from album a where (a.title like '%" +albumtitle + "%')"
+    albums_tuple = execute_sql(query,1)
+    albums = []
+    for i in range(len(albums_tuple)) :
+        albums.append(Album(album_id= songs_tuple[i][0], title= songs_tuple[i][1], price=songs_tuple[i][3]))
+    return albums
+
+
+def search_playlist(playlisttitle):
+    query = "select * from playlist p where p.title like '%" +playlisttitle + "%' and p.is_private = False"
+    playlists_tuple = execute_sql(query,1)
+    playlists = []
+    for i in range(len(playlists_tuple)) :
+        playlists.append(Playlist(playlist_id= playlists_tuple[i][0], title= playlists_tuple[i][1]))
+    return playlists
+
+
+def search_events(eventtitle):
+    query = "select * from event e where e.title like '%" + eventtitle + "%'"
+    events_tuple = execute_sql(query,1)
+    events = []
+    for i in range(len(events_tuple)) :
+        events.append(Event(event_id= events_tuple[i][0], name= events_tuple[i][1], date=events_tuple[i][2],
+                            location=events_tuple[i][3], about=events_tuple[i][4]))
+    return events
+
 # create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
@@ -515,4 +563,5 @@ def timeline_message(user_id):
 # create_artist('esda@dasadsda','isim','ast','male','ushsarkierer',"pass",'3',dt.datetime(2000,2,1))
 # create_song("title",dt.datetime(1995,12,1),time.strftime("%M%S",time.gmtime(284)),1,3,2,105,'rock')
 # rate_song(108,4,5)
-purchase_album(86, 2)
+#purchase_album(86, 2)
+search_song("cry")
