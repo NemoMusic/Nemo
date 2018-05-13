@@ -38,7 +38,7 @@ class Song:
 
 class Playlist:
 
-    def __init__(self, playlist_id, title, create_date, is_private):
+    def __init__(self, playlist_id=None, title=None, create_date=None, is_private=None):
         self.playlist_id = playlist_id
         self.title = title
         self.create = create_date
@@ -47,7 +47,7 @@ class Playlist:
 
 class Album:
 
-    def __init__(self, album_id, title, release_date, price, artist, rate=None):
+    def __init__(self, album_id=None, title=None, release_date=None, price=None, artist=None, rate=None):
         self.album_id = album_id
         self.title = title
         self.release_date = release_date
@@ -58,7 +58,7 @@ class Album:
 
 class Event:
 
-    def __init__(self, event_id, name, date, location, about):
+    def __init__(self, event_id=None, name=None, date=None, location=None, about=None):
         self.event_id = event_id
         self.name = name
         self.date = date
