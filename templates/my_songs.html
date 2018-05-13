@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../static/bottom.css" type="text/css">
   <link rel="stylesheet" href="../static/theme.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
@@ -14,7 +13,8 @@
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
-  </head>
+</head>
+ 
 <body>
   <hr>
   <div>
@@ -71,10 +71,25 @@
     </nav>
   </div>
   <hr>
-  <div>
-    <script>
+
+  <script>
       $(document).ready( function () {
         $('#example').DataTable();
+      
+        // Check Radio-box
+        $(".rating input:radio").attr("checked", false);
+    
+        $('.rating input').click(function () {
+            $(".rating span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+    
+        $('input:radio').change(
+          function(){
+            var userRating = this.value;
+            alert("You give the rating " + userRating + "/5");
+        }); 
+
       } );
   </script>
   <table id="example" class="display" style="width:100%">
@@ -96,15 +111,15 @@
                 <td data-search="{{song.title}}">{{song.title}}</td>
                 <td>{{song.artist_name}}</td>
                 <td>{{song.duration}}</td>
-                <td>{{song.genre}}</td>
+                <td>{{song.genre[0]}}</td>
                 <td>{{song.number_of_listen}}</td>
                 <td><img src="../static/delete.png" alt="Delete" height="24" width="24"></td>
             </tr>
         {% endfor %}
         </tbody>
       </table>
-  </div>
-  <hr>
+
+    <hr>
   <div class="py-3 bg-primary">
     <div class="container">
       <div class="row">
@@ -164,30 +179,10 @@
     </div>
   </div>
   <hr>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"></script>
   <script>
     var vid = document.getElementById("myMusic");
-		vid.style.width = '600px';
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-        // Check Radio-box
-        $(".rating input:radio").attr("checked", false);
-    
-        $('.rating input').click(function () {
-            $(".rating span").removeClass('checked');
-            $(this).parent().addClass('checked');
-        });
-    
-        $('input:radio').change(
-          function(){
-            var userRating = this.value;
-            alert("You give the rating " + userRating + "/5");
-        }); 
-    });
+    vid.style.width = '600px';
   </script>
 </body>
-
+ 
 </html>
