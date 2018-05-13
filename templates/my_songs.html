@@ -61,7 +61,7 @@
                   </form>
                 </div>
                 <div class="col-md-2">
-                  <label class="text-center text-secondary" href="/logout"> Logout </label>
+                  <a class="text-center text-secondary" href="/logout"> Logout </a>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
                 <td data-search="{{song.title}}">{{song.title}}</td>
                 <td>{{song.artist_name}}</td>
                 <td>{{song.duration}}</td>
-                <td>{{song.genre[0]}}</td>
+                <td>{{song.genre}}</td>
                 <td>{{song.number_of_listen}}</td>
                 <td><img src="../static/delete.png" alt="Delete" height="24" width="24"></td>
             </tr>

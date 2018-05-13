@@ -56,7 +56,14 @@ def mySons():
 
 @app.route('/market')
 def market():
-    return render_template('market.html')
+    return render_template('market.html', songs= db_methods.get_songs_by_most_listened(), albums = db_methods.get_albums_by_most_listened())
+
+
+@app.route('/buyalbum', methods=["POST", "GET"])
+def buyalbum():
+    album_id = request.args.get('id')
+    message = db_methods.purchase_album(session['user_id'],album_id)
+    return redirect('/market?buyalbum='+ message+'')
 
 
 @app.route('/timeline')
@@ -71,3 +78,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run()
+

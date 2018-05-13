@@ -71,7 +71,7 @@
                   </form>
                 </div>
                 <div class="col-md-2">
-                  <label class="text-center text-secondary" href="/logout"> Logout </label>
+                  <a class="text-center text-secondary" href="/logout"> Logout </a>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
             <img src="../static/logo.png" height="64" width="64">
             <div class="car-detail">{{artist_name}}</div>
             <div class="car-detail">{{price}}</div>
-            <a class="nav-link text-secondary" href="/buyalbum?id={{id}}">Buy</a>
+            <a class="nav-link text-secondary" href="buyalbum?id={{id}}">Buy</a>
         </div>
     </div>
   </template>
@@ -120,21 +120,19 @@
         },
         columns: 5,
         template: $('#song-template'),
-        header: 'Most Popular Albums',
-        datasource: [
-            {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
-            {'brand': 'Audi', 'year': 2011, 'color': 'Black', 'vin': 'gwregre345'},
-            {'brand': 'Renault', 'year': 2005, 'color': 'Gray', 'vin': 'h354htr'},
-            {'brand': 'BMW', 'year': 2003, 'color': 'Blue', 'vin': 'j6w54qgh'},
-            {'brand': 'Ford', 'year': 1995, 'color': 'White', 'vin': 'hrtwy34'},
-            {'brand': 'Fiat', 'year': 2005, 'color': 'Black', 'vin': 'jejtyj'},
-            {'brand': 'Honda', 'year': 2012, 'color': 'Yellow', 'vin': 'g43gr'},
-            {'brand': 'Volvo', 'year': 2013, 'color': 'White', 'vin': 'greg34'},
-            {'brand': 'Ford', 'year': 2000, 'color': 'Black', 'vin': 'h54hw5'},
-            {'brand': 'BMW', 'year': 2013, 'color': 'Red', 'vin': '245t2s'},
-            {'brand': 'Jaguar', 'year': 2011, 'color': 'Blue', 'vin': 'few234'},
-            {'brand': 'Ford', 'year': 2010, 'color': 'White', 'vin': 'bfnt23'},
+        header: 'Most Popular Song',
+        datasource:[
+            {% for song in songs %}
+            {% raw %}
+            {
+            {% endraw %}
+                'id': '{{song.song_id}}', 'title': '{{ song.title }}', 'artist_name': '{{ song.artist_name }}', 'price': '{{ song.price }}'
+            {% raw %}
+            },
+            {% endraw %}
+            {% endfor %}
         ]
+
     });
     $('#songgrid').puidatagrid({
         paginator: {
@@ -142,20 +140,17 @@
         },
         columns: 5,
         template: $('#album-template'),
-        header: 'Most Popular Songs',
-        datasource: [
-            {'brand': 'Volkswagen', 'year': 2012, 'color': 'White', 'vin': 'dsad231ff'},
-            {'brand': 'Audi', 'year': 2011, 'color': 'Black', 'vin': 'gwregre345'},
-            {'brand': 'Renault', 'year': 2005, 'color': 'Gray', 'vin': 'h354htr'},
-            {'brand': 'BMW', 'year': 2003, 'color': 'Blue', 'vin': 'j6w54qgh'},
-            {'brand': 'Ford', 'year': 1995, 'color': 'White', 'vin': 'hrtwy34'},
-            {'brand': 'Fiat', 'year': 2005, 'color': 'Black', 'vin': 'jejtyj'},
-            {'brand': 'Honda', 'year': 2012, 'color': 'Yellow', 'vin': 'g43gr'},
-            {'brand': 'Volvo', 'year': 2013, 'color': 'White', 'vin': 'greg34'},
-            {'brand': 'Ford', 'year': 2000, 'color': 'Black', 'vin': 'h54hw5'},
-            {'brand': 'BMW', 'year': 2013, 'color': 'Red', 'vin': '245t2s'},
-            {'brand': 'Jaguar', 'year': 2011, 'color': 'Blue', 'vin': 'few234'},
-            {'brand': 'Ford', 'year': 2010, 'color': 'White', 'vin': 'bfnt23'},
+        header: 'Most Popular Albums',
+        datasource:[
+        {% for album in albums %}
+            {% raw %}
+            {
+            {% endraw %}
+                'id': '{{album.album_id}}', 'title': '{{ album.title }}', 'artist_name': '{{ album.artist_name }}', 'price': '{{ album.price }}'
+            {% raw %}
+            },
+            {% endraw %}
+            {% endfor %}
         ]
     });
 
