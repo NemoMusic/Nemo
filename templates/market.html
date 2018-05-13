@@ -126,7 +126,7 @@
             alert(message);
         }
 
-        $('#albumgrid').puidatagrid({
+        $('#songgrid').puidatagrid({
             paginator: {
                 rows: 5
             },
@@ -134,40 +134,23 @@
             template: $('#song-template'),
             header: 'Most Popular Song',
             datasource: [
-                { % for song in songs %
-        }
-        {%
-            raw %
-        }
-        {
-            {%
-                endraw %
-            }
-            'id'
-        :
-            '{{song.song_id}}', 'title'
-        :
-            '{{ song.title }}', 'artist_name'
-        :
-            '{{ song.artist_name }}', 'price'
-        :
-            '{{ song.price }}'
-            {%
-                raw %
-            }
-        }
-    ,
-        {%
-            endraw %
-        }
-        {%
-            endfor %
-        }
+        {% for song in songs %}
+            {% raw %}
+            {
+            {% endraw %}
+                'id' :'{{ song.song_id }}',
+                'title': '{{ song.title }}',
+                'artist_name':'{{ song.artist_name }}',
+                'price':'{{ song.price }}'
+            {% raw %}
+            },
+            {% endraw %}
+        {% endfor %}
     ]
 
     })
         ;
-        $('#songgrid').puidatagrid({
+        $('#albumgrid').puidatagrid({
             paginator: {
                 rows: 5
             },
@@ -175,38 +158,20 @@
             template: $('#album-template'),
             header: 'Most Popular Albums',
             datasource: [
-                { % for album in albums %
-        }
-        {%
-            raw %
-        }
-        {
-            {%
-                endraw %
-            }
-            'id'
-        :
-            '{{album.album_id}}', 'title'
-        :
-            '{{ album.title }}', 'artist_name'
-        :
-            '{{ album.artist_name }}', 'price'
-        :
-            '{{ album.price }}'
-            {%
-                raw %
-            }
-        }
-    ,
-        {%
-            endraw %
-        }
-        {%
-            endfor %
-        }
-    ]
-    })
-        ;
+                {% for album in albums %}
+                    {% raw %}
+                    {
+                    {% endraw %}
+                        'id' :'{{ album.album_id }}',
+                        'title': '{{ album.title }}',
+                        'artist_name':'{{ album.artist_name }}',
+                        'price':'{{ album.price }}'
+                    {% raw %}
+                    },
+                    {% endraw %}
+                {% endfor %}
+            ]
+        });
 
         $(".rating input:radio").attr("checked", false);
 

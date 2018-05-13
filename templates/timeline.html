@@ -90,8 +90,8 @@
 <hr>
 <div>
     <div id="ds"></div>
-
-    <template id="cartemplate">
+    {% raw %}
+    <template id="timeline-template">
         <div class="ui-grid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
@@ -117,6 +117,7 @@
             </div>
         </div>
     </template>
+    {% endraw %}
     <script>
         $("#ds").puidatascroller({
             header: 'Scroll Down to Load More',
@@ -124,10 +125,22 @@
             totalSize: 200,
             scrollHeight: 500,
             lazy: true,
-            datasource: null,
-            mode: 'self',
-            template: $('#cartemplate')
-        });
+            datasource: [
+            {% for activity in activities %}
+                {% raw %}
+                {
+                {% endraw %}
+                    'id' :'{{activity.activity_id}}',
+                    'message': '{{ activity.text }}',
+                    'date':'{{ activity.date }}'
+                {% raw %}
+                },
+                {% endraw %}
+                {% endfor %}
+                ]
+                mode: 'self',
+                template: $('#timeline-template')
+            });
     </script>
 </div>
 <hr>

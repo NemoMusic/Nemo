@@ -499,7 +499,8 @@ def get_followings(user_id):
     print("followers of user : ", user_id, "\n", followings)
 
 
-def timeline_message(self_user_id):
+def timeline_message(user_id):
+
     return
 
 
