@@ -8,6 +8,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a27'
 
 
+def authcheck():
+    if 'user_id' in session:
+        return
+    else:
+        return redirect('/login')
+
+
 @app.route('/')
 def hello():
     if 'user_id' in session:
@@ -53,17 +60,20 @@ def signIn():
 
 @app.route('/mysongs')
 def mySons():
+    authcheck()
     return render_template('my_songs.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
 
 
 @app.route('/market')
 def market():
+    authcheck()
     return render_template('market.html', songs=db_methods.get_songs_by_most_listened(),
                            albums=db_methods.get_albums_by_most_listened())
 
 
 @app.route('/buyalbum', methods=["POST", "GET"])
 def buyalbum():
+    authcheck()
     album_id = request.args.get('id')
     message = db_methods.purchase_album(session['user_id'], album_id)
     return redirect('/market?message=' + message + '')
@@ -71,6 +81,7 @@ def buyalbum():
 
 @app.route('/buysong', methods=["POST", "GET"])
 def buysong():
+    authcheck()
     song_id = request.args.get('id')
     message = db_methods.purchase_song(session['user_id'], song_id)
     return redirect('/market?message=' + message + '')
@@ -78,6 +89,7 @@ def buysong():
 
 @app.route('/timeline')
 def timeline():
+    authcheck()
     return render_template('timeline.html')
 
 
