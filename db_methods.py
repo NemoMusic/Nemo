@@ -493,7 +493,7 @@ def get_albums_by_most_listened():
 
 
 def get_songs_by_rate():
-    sql = "SELECT song_id FROM song_rate "
+    sql = "SELECT song_id FROM song_rate ORDER BY rate DESC"
     songs = execute_sql(sql,1)
 
     res = []
@@ -514,7 +514,7 @@ def get_songs_by_rate():
 
 
 def get_album_by_rate():
-    sql = "SELECT album_id FROM album_rate"
+    sql = "SELECT album_id FROM album_rate ORDER BY rate DESC"
     albums = execute_sql(sql,1)
     res = []
 
