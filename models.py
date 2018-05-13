@@ -19,7 +19,8 @@ class Artist:
 # Genre is a seperate table in db but added into a Song in class diagram because it has no other function
 class Song:
 
-    def __init__(self, song_id, title, release_date, duration, number_of_listen, price, album_id, genre, artist_name, album_name):
+    def __init__(self, song_id, title, release_date, duration, number_of_listen, price, album_id, genre, artist_name,
+                 album_name):
         self.song_id = song_id
         self.title = title
         self.release_date = release_date
@@ -73,7 +74,7 @@ class Activity:
 class Share:
 
     def __init__(self, activity_id, date, entity_type, action_type, share_comment):
-        Activity.__init__(activity_id ,date, entity_type, action_type)
+        Activity.__init__(activity_id, date, entity_type, action_type)
         self.share_comment = share_comment
 
 
@@ -98,8 +99,3 @@ class ActivityReport:
         self.entity_type = entity_type
         self.entity_id = entity_id
         self.text = text
-
-
-
-
-

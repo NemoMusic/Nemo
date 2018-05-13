@@ -3,9 +3,9 @@ import pymysql
 connection = None
 
 connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com',
-                            user='nemo',
-                            password='nemoadmin',
-                            db='nemodb')
+                             user='nemo',
+                             password='nemoadmin',
+                             db='nemodb')
 
 
 def execute_sql(sql):
@@ -35,7 +35,6 @@ create_user_table = """create table user(
             birth_date	   date,
             primary key (id)) engine = INNODB;"""
 
-
 create_event_table = """create table event(
             id          int not null auto_increment,
             name		varchar(50) not null,
@@ -44,13 +43,11 @@ create_event_table = """create table event(
             about       varchar(140),
             primary key (id)) engine = INNODB;"""
 
-
 create_artist_table = """create table artist(
 		    user_id                     int ,
 		    account_validation_date     date,
 		    primary key (user_id),
 		    foreign key (user_id) references user(id)) engine = INNODB;"""
-
 
 create_playlist_table = """create table playlist(
             id              int  not null auto_increment,
@@ -61,14 +58,12 @@ create_playlist_table = """create table playlist(
             primary key (id),
             foreign key (user_id) references user(id)) engine = INNODB;"""
 
-
 create_album_table = """create table album(
             id		        int  not null auto_increment,
             title			varchar(20) not null,
             release_date	date,
             price			int not null,
             primary key (id)) engine = INNODB;"""
-
 
 create_song_table = """create table song(
             id			    int  not null auto_increment,
@@ -81,11 +76,9 @@ create_song_table = """create table song(
             primary key (id),
             foreign key (album_id) references album(id))engine = INNODB;"""
 
-
 create_genre_table = """create table genre(
 		    name     varchar(10) not null,
 		    primary key (name))engine = INNODB;"""
-
 
 create_activity_table = """create table activity(
             id			    int not null auto_increment,
@@ -96,28 +89,26 @@ create_activity_table = """create table activity(
             primary key (id),
             foreign key (user_id) references user(id))engine = INNODB;"""
 
-
 create_share_table = """create table share(
             activity_id			int not null,
             share_comment		varchar(50),
             primary key (activity_id),
             foreign key (activity_id) references activity(id))engine = INNODB;"""
 
-
-create_follow_table ="""create table follow(
+create_follow_table = """create table follow(
             activity_id int NOT NULL,
             FOREIGN KEY (activity_id) REFERENCES activity(id),
             PRIMARY KEY (activity_id)
 ) engine = INNODB;"""
 
-create_rate_table ="""create table rate(
+create_rate_table = """create table rate(
             activity_id int NOT NULL,
             value int NOT NULL,
             FOREIGN KEY (activity_id) REFERENCES album(id),
             PRIMARY KEY (activity_id)
 ) engine = INNODB;"""
 
-create_comment_table ="""create table comment(
+create_comment_table = """create table comment(
             activity_id int NOT NULL,
             text  VARCHAR(50) NOT NULL,
             FOREIGN KEY (activity_id) REFERENCES album(id),
@@ -132,7 +123,6 @@ create_user_follow = """create table user_follow(
             on delete cascade on update cascade,
             foreign key(following_id) references user(id) 
             on delete cascade on update cascade) engine = INNODB;"""
-
 
 create_user_song = """create table user_song(
             user_id   int not null,
@@ -215,24 +205,24 @@ create_table_song_genre = """create table song_genre(
             foreign key(genre_name) references genre(name)
             on delete cascade on update cascade) engine = INNODB;"""
 
-#execute_sql(create_user_table)
-#execute_sql(create_event_table)
-#execute_sql(create_artist_table)
-#execute_sql(create_playlist_table)
-#execute_sql(create_album_table)
-#execute_sql(create_song_table)
-#execute_sql(create_genre_table)
-#execute_sql(create_activity_table)
-#execute_sql(create_share_table)
-#execute_sql(create_follow_table)
-#execute_sql(create_rate_table)
-#execute_sql(create_comment_table)
-#execute_sql(create_user_follow)
-#execute_sql(create_user_song)
-#execute_sql(create_user_album)
-#execute_sql(create_artist_song)
-#execute_sql(create_playlist_song)
-#execute_sql(create_comment_reply)
-#execute_sql(create_table_song_genre)
-#execute_sql(create_participation_artist)
-#execute_sql(create_participation_user)
+# execute_sql(create_user_table)
+# execute_sql(create_event_table)
+# execute_sql(create_artist_table)
+# execute_sql(create_playlist_table)
+# execute_sql(create_album_table)
+# execute_sql(create_song_table)
+# execute_sql(create_genre_table)
+# execute_sql(create_activity_table)
+# execute_sql(create_share_table)
+# execute_sql(create_follow_table)
+# execute_sql(create_rate_table)
+# execute_sql(create_comment_table)
+# execute_sql(create_user_follow)
+# execute_sql(create_user_song)
+# execute_sql(create_user_album)
+# execute_sql(create_artist_song)
+# execute_sql(create_playlist_song)
+# execute_sql(create_comment_reply)
+# execute_sql(create_table_song_genre)
+# execute_sql(create_participation_artist)
+# execute_sql(create_participation_user)

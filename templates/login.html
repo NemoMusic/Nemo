@@ -2,117 +2,132 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../static/theme.css" type="text/css"> </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="../static/theme.css" type="text/css">
+</head>
 
 <body>
-  <div class="p-5 text-center text-white bg-primary">
+<div class="p-5 text-center text-white bg-primary">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2  offset-md-5">
-          <img class="d-block img-fluid" src="../static/logo.png" data-holder-rendered="true"> </div>
-      </div>
-      <div>
-        <div class="col-md-12">
-          <h1 class="mb-4 text-secondary">Nemo Music.</h1>
+        <div class="row">
+            <div class="col-md-12"></div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6  border-right">
-          <div class="col-md-12">
-            <div class="card text-white p-5 bg-primary">
-              <div class="card-body">
-                <h1 class="mb-4">Login form</h1>
-                <h4> {{message1}}</h4>
-                <form action="/home" method="post" id="login">
-                  <div class="form-group">
-                    <label class="text-secondary">Email address</label>
-                    <input type="email" name="loginEmail" class="form-control" placeholder="Enter email" required=""> </div>
-                  <div class="form-group">
-                    <label class="text-secondary">Password</label>
-                    <input type="password" name="loginPassword" class="form-control" placeholder="Password" required=""> </div>
-                  <button type="submit" class="btn btn-secondary">Login</button>
-                </form>
-              </div>
-            </div>
-            <div class="col-md-6"> </div>
-          </div>
+        <div class="row">
+            <div class="col-md-2  offset-md-5">
+                <img class="d-block img-fluid" src="../static/logo.png" data-holder-rendered="true"></div>
         </div>
-        <div class="col-md-6">
-          <div class="card-body">
-            <h1 class="mb-4">Sign Up</h1>
-            <h4> {{message2}}</h4>
-            <form action="/signIn" method="post">
-              <div class="form-group">
-                <label for="InputName" class="text-secondary">Your name</label>
-                <input type="text" name="name" class="form-control" placeholder="Your name" id="InputName" required=""> </div>
-              <div class="form-group">
-                <label for="InputEmail1" class="text-secondary">Last Name</label>
-                <input type="text" name="lastname" class="form-control" placeholder="Your last name" id="InputEmail1" required=""> </div>
-              <div class="form-group">
-                <label for="InputUserName" class="text-secondary">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Your username" id="InputUserName" required=""> </div>
-              <div class="form-group">
-                <label for="InputEmail" class="text-secondary">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Your email" id="InputEmail" required=""> </div>
-              <div class="form-group">
-                <label for="InputPassword" class="text-secondary">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" id="InputPassword" required=""> </div>
-              <div class="row">
-                <div class="col-md-6  ">
-                  <div>
-                    <div>
-                      <label for="UserType" class="text-secondary">User Type</label>
-                    </div>
-                    <input type="radio" id="toggle-on" name="user_type" checked="" value="standart">
-                    <label for="toggle-on">Standart</label>
-                    <input type="radio" id="toggle-off" name="user_type" value="artist">
-                    <label for="toggle-off">Artist</label>
-                  </div>
-                </div>
-                <div class="col-md-6  ">
-                  <div>
-                    <label for="Gender" class="text-secondary">Gender</label>
-                  </div>
-                  <select name="gender">
-                    <option value="not">Not to disclose</option>
-                    <option value="female">Male</option>
-                    <option value="male">Female</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label class="primary text-primary">Gender</label>
-              </div>
-              <button type="submit" class="btn btn-secondary">Sign-Up</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="py-5">
-        <div class="container"> </div>
-      </div>
-      <div class="py-5">
-        <div class="container">
-          <div class="row">
+        <div>
             <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-12"> </div>
-              </div>
+                <h1 class="mb-4 text-secondary">Nemo Music.</h1>
             </div>
-          </div>
         </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <div class="row">
+            <div class="col-md-6  border-right">
+                <div class="col-md-12">
+                    <div class="card text-white p-5 bg-primary">
+                        <div class="card-body">
+                            <h1 class="mb-4">Login form</h1>
+                            <h4> {{message1}}</h4>
+                            <form action="/home" method="post" id="login">
+                                <div class="form-group">
+                                    <label class="text-secondary">Email address</label>
+                                    <input type="email" name="loginEmail" class="form-control" placeholder="Enter email"
+                                           required=""></div>
+                                <div class="form-group">
+                                    <label class="text-secondary">Password</label>
+                                    <input type="password" name="loginPassword" class="form-control"
+                                           placeholder="Password" required=""></div>
+                                <button type="submit" class="btn btn-secondary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h1 class="mb-4">Sign Up</h1>
+                    <h4> {{message2}}</h4>
+                    <form action="/signIn" method="post">
+                        <div class="form-group">
+                            <label for="InputName" class="text-secondary">Your name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Your name" id="InputName"
+                                   required=""></div>
+                        <div class="form-group">
+                            <label for="InputEmail1" class="text-secondary">Last Name</label>
+                            <input type="text" name="lastname" class="form-control" placeholder="Your last name"
+                                   id="InputEmail1" required=""></div>
+                        <div class="form-group">
+                            <label for="InputUserName" class="text-secondary">Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Your username"
+                                   id="InputUserName" required=""></div>
+                        <div class="form-group">
+                            <label for="InputEmail" class="text-secondary">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Your email"
+                                   id="InputEmail" required=""></div>
+                        <div class="form-group">
+                            <label for="InputPassword" class="text-secondary">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password"
+                                   id="InputPassword" required=""></div>
+                        <div class="row">
+                            <div class="col-md-6  ">
+                                <div>
+                                    <div>
+                                        <label for="UserType" class="text-secondary">User Type</label>
+                                    </div>
+                                    <input type="radio" id="toggle-on" name="user_type" checked="" value="standart">
+                                    <label for="toggle-on">Standart</label>
+                                    <input type="radio" id="toggle-off" name="user_type" value="artist">
+                                    <label for="toggle-off">Artist</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6  ">
+                                <div>
+                                    <label for="Gender" class="text-secondary">Gender</label>
+                                </div>
+                                <select name="gender">
+                                    <option value="not">Not to disclose</option>
+                                    <option value="female">Male</option>
+                                    <option value="male">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="primary text-primary">Gender</label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Sign-Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="py-5">
+            <div class="container"></div>
+        </div>
+        <div class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
     </div>
-  </div>
+</div>
 </body>
 
 </html>
