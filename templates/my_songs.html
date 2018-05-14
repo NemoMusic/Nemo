@@ -57,8 +57,9 @@
               </ul>
               <div class="row">
                 <div class="col-md-10">
-                  <form class="form-inline m-0">
-                    <input class="form-control mr-2 form-control-sm" type="text" placeholder="Songs,Albums,Artists" required="required">
+                  <form class="form-inline m-0" method="get" action="/search">
+                    <input class="form-control mr-2 form-control-sm" type="text"
+                           placeholder="Songs,Albums,Artists" name="key" required="required">
                     <button class="btn btn-secondary" type="submit">Search</button>
                   </form>
                 </div>
