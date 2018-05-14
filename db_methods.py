@@ -560,7 +560,6 @@ def timeline_message(user_id):
 
     message = execute_sql(query,1)
 
-
     logarray = []
     for i in range(len(message)):
         username = message[i][0]
@@ -571,13 +570,13 @@ def timeline_message(user_id):
         act_content = message[i][5]
         #it will return html
         if act_type == rate:
-            return
+            return '<a href="http://link">'+username+'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+username+'">'+rated_item+' as'+rate+' star</a>'
         elif act_type == follow:
-            return
+            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has fallowed </p><a href="/user?username=' + username2 + '">' + username2 + '</a>'
         elif act_type == share:
-            return
-        else:# comment type
-            return
+            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has shared </p><a href="/user?username=' + shared_item + '"></a>'
+        elif act_type == comment_a:
+            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> shared comment: </p><a href="/user?username=' + comment + '"></a>'
     return logarray
 
 
