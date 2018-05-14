@@ -14,6 +14,7 @@
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
 </head>
 
 <body>
@@ -152,7 +153,7 @@
                         waveColor: 'orange',
                         progressColor: 'gray',
                         });
-                        wavesurfer.load('../Docs/kayahan.mp3');
+                        wavesurfer.load('../static/mp3/kayahan.mp3');
                         wavesurfer.on('ready', function () {
                         wavesurfer.play();
                          });
