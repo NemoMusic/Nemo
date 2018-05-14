@@ -144,64 +144,77 @@
     </script>
 </div>
 <hr>
-<div id="bottommenu" class="py-3 bg-primary" style="position: fixed; bottom: 0; left: 0; right: 0;">
+  <div id="bottommenu" class="bg-primary p-0" style="position: fixed; bottom: 0px; left: 0px; right: 0px;">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img src="../static/kayahan.jpg" alt="ImageMusic" style="width:70px;height:70px;"></div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <p id="songName"> Bir Yemin Ettim ki </p>
-                        </div>
-                        <div name="song_artist" class="row">
-                            <p id="artistName"> Kayahan</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="ui-grid-col-3">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="../static/kayahan.jpg" alt="ImageMusic" style="width: 70px; height: 70px;" class="my-2"> </div>
+            <div class="col-md-6">
+              <div class="row">
+                <p id="songName"> Bir Yemin Ettim ki </p>
+              </div>
+              <div name="song_artist" class="row">
+                <p id="artistName"> Kayahan</p>
+              </div>
             </div>
-            <div class="col-md-5 d-flex justify-content-center">
-                <div class="row" width="40px">
-                    <audio src="../Docs/kayahan.mp3" controls="" id="myMusic">
-                        <p>Fallback content goes here.</p>
-                    </audio>
-                </div>
-            </div>
-            <div class="col-md-3" draggable="true">
-                <div class="row d-flex justify-content-center">
-                    <div class="rating">
+          </div>
+        </div>
+        <div class="ui-grid-col-1">
+          <a href="#" class="btn btn-outline-primary my-4" style="background-image: url('../static/23ef.png'); background-size: cover; width: 48px; height: 48px;"
+            onclick="wavesurfer.playPause()"></a>
+        </div>
+        <div class="ui-grid-col-7">
+          <div id="waveform" style="background-color: rgb(10, 10, 10); width: 700px;" class="mx-2 bg-primary"></div>
+          <div class="row" width="40px">
+            <script>
+              var wavesurfer = WaveSurfer.create({
+                        container: '#waveform',
+                        waveColor: 'orange',
+                        progressColor: 'gray',
+                        });
+                        wavesurfer.load('../Docs/kayahan.mp3');
+                        wavesurfer.on('ready', function () {
+                        wavesurfer.play();
+                         });
+            </script>
+          </div>
+        </div>
+        <div class="ui-grid-col-1 my-2">
+          <div class="row d-flex justify-content-center">
+            <div class="rating">
               <span>
                 <input type="radio" name="rating" id="str5" value="5">
                 <label for="str5"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str4" value="4">
                 <label for="str4"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str3" value="3">
                 <label for="str3"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str2" value="2">
                 <label for="str2"></label>
               </span>
-                        <span>
+              <span>
                 <input type="radio" name="rating" id="str1" value="1">
                 <label for="str1"></label>
               </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p id="ratingText">Rating</p>
-                    </div>
-                </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p id="ratingText">Rating</p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 <hr>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
