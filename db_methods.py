@@ -427,6 +427,11 @@ def get_songs_of_users(user_id):
     sql = "SELECT song_id FROM user_song  WHERE user_id = '%s'" % user_id
     song_ids = execute_sql(sql, 1)
     res = []
+    sql = "SELECT s.id " \
+          "FROM user_album ua join song s on s.album_id = ua.album_id " \
+          "WHERE ua.user_id = '%s'" % user_id
+    song_ids += execute_sql(sql, 1)
+    song_ids = set(song_ids)
 
     print(song_ids)
 
@@ -447,7 +452,6 @@ def get_songs_of_users(user_id):
         res.append(s)
 
     return res
-
 
 def get_songs_by_most_listened():
     sql = "SELECT song.id FROM song ORDER BY number_of_listen DESC "
