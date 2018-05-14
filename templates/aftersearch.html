@@ -141,10 +141,12 @@
     </div>
 </template>
 {% endraw %}
-<div id="albumgrid"></div>
-<div id="songgrid"></div>
-<div id="eventgrid"></div>
-<div id="usergrid"></div>
+<div style="overflow-y: scroll; height: 500px">
+    <div id="albumgrid"></div>
+    <div id="songgrid"></div>
+    <div id="eventgrid"></div>
+    <div id="usergrid"></div>
+</div>
 <script>
     $(function () {
         var url_all = window.location.href;
