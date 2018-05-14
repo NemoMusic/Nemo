@@ -119,6 +119,9 @@ def logout():
     session.pop('user_id')
     return redirect('/')
 
+@app.route('/createPlaylist')
+def createPlaylistPage():
+    return render_template('create_playlist.html')
 
 if __name__ == '__main__':
     app.run()
