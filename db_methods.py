@@ -3,6 +3,7 @@ import datetime as dt
 import time
 
 
+
 from models import *
 
 connection = None
@@ -542,7 +543,7 @@ def get_followings(user_id):
 
 def timeline_message(user_id):
     query = """
-            select  a.id, a.user_id, following.user_name, a.date, a.entity_type, a.entity_id, a.action_type,
+            select  following.user_name, a.date, a.entity_type, a.entity_id, a.action_type,
             case a.action_type
               WHEN '%s' THEN '%s'
               WHEN '%s' THEN share.share_comment
@@ -556,10 +557,28 @@ def timeline_message(user_id):
             LEFT OUTER JOIN comment ON (a.id = comment.activity_id)
             WHERE ('%s' = uf.follower_id and following.id = uf.following_id and a.user_id = following.id)
             """ %(follow,user_id,share,comment_a,rate,user_id)
+
     message = execute_sql(query,1)
+
+
+    logarray = []
     for i in range(len(message)):
-        print(message[i])
-    return message
+        username = message[i][0]
+        date = message[i][1]
+        entitytype = message[i][2]
+        entity_id = message[i][3]
+        act_type = message[i][4]
+        act_content = message[i][5]
+        #it will return html
+        if act_type == rate:
+            return
+        elif act_type == follow:
+            return
+        elif act_type == share:
+            return
+        else:# comment type
+            return
+    return logarray
 
 
 def search_user(username):
@@ -569,6 +588,7 @@ def search_user(username):
 
     for i in range(len(users_tuple)) :
         users.append(User(user_id= users_tuple[i][0], username= users_tuple[i][5]))
+
     return users
 
 
@@ -609,8 +629,24 @@ def search_events(eventtitle):
         events.append(Event(event_id= events_tuple[i][0], name= events_tuple[i][1], date=events_tuple[i][2],
                             location=events_tuple[i][3], about=events_tuple[i][4]))
     return events
+def levenshtein_distance(x,y):
+    if not len(x):
+        return len(y)
+    if not len(y):
+        return len(x)
+    return min(levenshtein_distance(x[1:], y[1:]) + (x[0] != y[0]), levenshtein_distance(x[1:], y) + 1, levenshtein_distance(x, y[1:]) + 1)
+def did_u_mean_user(searchq,treshold):
+    user_query = """
+            select user.user_name from user
+            """
+    others = execute_sql(user_query,1)
+    for i in range(len(others)):
+        if(levenshtein_distance(searchq,others[i][5])<treshold):
+            print("Did you mean " + others[i][5])
+            return "Did you mean " + others[i][5]
 
-# create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
+
+#create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
 # converts seconds to min and sec
@@ -624,3 +660,4 @@ def search_events(eventtitle):
 #purchase_album(86, 2)
 #search_song("cry")
 #timeline_message(10)
+#print(levenshtein_distance("blknt", "bilkent"))
