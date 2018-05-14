@@ -18,26 +18,11 @@
 </head>
 
 <body>
-  <div style="overflow-y: scroll; height: 500px">
+  <div style="overflow-y: scroll; height: 500px; background-color: #1a1a1a;">
   <script>
     $(document).ready(function () {
 
         $('#example').DataTable();
-
-        // Check Radio-box
-        $(".rating input:radio").attr("checked", false);
-
-        $('.rating input').click(function () {
-            $(".rating span").removeClass('checked');
-            $(this).parent().addClass('checked');
-        });
-
-        $('input:radio').change(
-            function () {
-                var userRating = this.value;
-                alert("You give the rating " + userRating + "/5");
-            });
-
     });
   </script>
   <table id="example" class="display" style="width:100%">
