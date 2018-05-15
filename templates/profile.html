@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../static/profile.css" type="text/css"> 
   <link rel="stylesheet" href="../static/theme.css" type="text/css"></head>
-
-
 <body>
   <div class="py-5 bg-primary">
     <div class="container">
@@ -16,17 +14,17 @@
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-3">
-              <img src="../static/aaa.png" alt="Profile Photo" style="width: 120px; height: 120px;"> </div>
+              <img src="../static/userimgs/{{user.id}}.png" alt="Profile Photo" style="width: 120px; height: 120px;"> </div>
             <div class="col-md-8">
-              <h1> Kerem Ayöz </h6>
-              <h3>@krmayz</h3>
+              <h1> {{user.name}} {{user.lastname}} </h6>
+              <h3>@{{user.username}}</h3>
             </div>
             <div class="col-md-1">
                <div class="row">
  				<img src="../static/wallet.png" alt="Wallet Photo" style="width: 40px; height: 40px;">
           		</div>
                	 <div class="row">
-               	 	<p>150 TL</p>
+               	 	<p>{{user.wallet}} TL</p>
                	</div>
             </div>
           </div>
@@ -37,53 +35,21 @@
             <div class="col-md-6">
               <h6> Created Playlist</h6>
               <ul class="list-group">
+                (% for p1 in pl1}
                 <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 1</a>
+                  <a href="/playlist?id={{p1.p1aylist_id}}">{{p1.title}}</a>
                 </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 2</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 3</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 4</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 5</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 6</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 7</a>
-                </li>
+                (% endfor %)
               </ul>
             </div>
             <div class="col-md-6">
               <h6> Following Playlist</h6>
               <ul class="list-group">
+                (% for p2 in pl2}
                 <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 1</a>
+                  <a href="/playlist?id={{p2.p1aylist_id}}">{{p2.title}}</a>
                 </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 2</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 3</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 4</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 5</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 6</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 7</a>
-                </li>
+                (% endfor %)
               </ul>
             </div>
           </div>
@@ -94,60 +60,22 @@
               <div class="col-md-12">
                 <h6> Following</h6>
                 <ul class="list-group">
+                  {% for following in followings %}
                   <li class="list-group-item">
-                    <a href="https://www.goal.com">@omerkrky</a>
+                    <a href="/otherprofile?username={{following}}">{{following}}</a>
                   </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@merayman</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@omerkrky</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@merayman</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@omerkrky</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@merayman</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@omerkrky</a>
-                  </li>
-                  <li class="list-group-item">
-                    <a href="https://www.goal.com">@merayman</a>
-                  </li>
+                  {% endfor %}
                 </ul>
               </div>
             </div>
             <div class="col-md-6">
               <h6> Followers</h6>
               <ul class="list-group">
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@omerkrky</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@merayman</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@omerkrky</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@merayman</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@omerkrky</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@merayman</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@omerkrky</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">@merayman</a>
-                </li>
+                {% for following in followers %}
+                  <li class="list-group-item">
+                    <a href="/otherprofile?username={{follower}}">{{follower}}</a>
+                  </li>
+                  {% endfor %}
               </ul>
             </div>
           </div>
@@ -159,21 +87,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <ul class="list-group w-100 mx-1" id="eventsList" style="background-color: rgb(26, 26, 26);" height="100px">
+                    {% event in events %}
                     <li class="list-group-item">
-                      <p>Duman Concert, Istanbul, 25.05.2018, Küçükçiftlik Park</p>
+                      <a href="/otherprofile?event={{event}}">{{event}}</a>
                     </li>
-                    <li class="list-group-item">
-                      <p>Duman Concert, Istanbul, 25.05.2018, Küçükçiftlik Park</p>
-                    </li>
-                    <li class="list-group-item">
-                      <p>Duman Concert, Istanbul, 25.05.2018, Küçükçiftlik Park</p>
-                    </li>
-                    <li class="list-group-item">
-                      <p>Duman Concert, Istanbul, 25.05.2018, Küçükçiftlik Park</p>
-                    </li>
-                    <li class="list-group-item">
-                      <p>Duman Concert, Istanbul, 25.05.2018, Küçükçiftlik Park</p>
-                    </li>
+                    {% endfor %}
                   </ul>
                 </div>
               </div>
