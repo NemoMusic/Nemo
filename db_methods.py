@@ -37,6 +37,7 @@ song = "SONG"
 album = "ALBUM"
 user = "USER"
 comment_e = "COMME"
+playlist = "PLIST"
 # ACTIVITY TYPES
 follow = "FOLLO"
 rate = "RATE"
@@ -574,12 +575,28 @@ def timeline_message(user_id):
         act_content = message[i][5]
         #it will return html
         if act_type == rate:
+            if entitytype == song:
+                sql = "SELECT title FROM song WHERE id = '%s'" % entity_id
+            else:
+                sql = "SELECT title FROM album WHERE id = '%s'" % entity_id
+            rated_item = execute_sql(sql)
             return '<a href="http://link">'+username+'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+username+'">'+rated_item+' as'+rate+' star</a>'
         elif act_type == follow:
+            sql = "SELECT name FROM user WHERE id = '%s'" % entity_id
+            username2 = execute_sql(sql)
             return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has fallowed </p><a href="/user?username=' + username2 + '">' + username2 + '</a>'
         elif act_type == share:
+            if entitytype == song:
+                sql = "SELECT title FROM song WHERE id = '%s'" % entity_id
+            elif entitytype == album:
+                sql = "SELECT title FROM album WHERE id = '%s'" % entity_id
+            else:
+                sql = "SELECT title FROM playlist WHERE id = '%s'" % entity_id
+            shared_item = execute_sql(sql)
             return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has shared </p><a href="/user?username=' + shared_item + '"></a>'
         elif act_type == comment_a:
+            sql = "SELECT text FROM comment WHERE activity_id = '%s'" % entity_id
+            comment = execute_sql(sql)
             return '<a href="http://link">' + username + '</a><p style="text-align: right;"> shared comment: </p><a href="/user?username=' + comment + '"></a>'
     return logarray
 
