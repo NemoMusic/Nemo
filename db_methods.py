@@ -570,10 +570,27 @@ def get_album_by_rate():
 
 
 def get_followings(user_id):
-    query = """select following.* from user following, user_follow f WHERE ('%s' = f.follower_id and following.id = f.following_id)
+    query = """select following.user_name from user following, user_follow f WHERE ('%s' = f.follower_id and following.id = f.following_id)
             """ % (user_id)
     followings = execute_sql(query, 1)
-    print("followers of user : ", user_id, "\n", followings)
+    print("followings of user : ", user_id, "\n")
+    followinglist = []
+    for i in range(len(followings)):
+        followinglist.append(followings[i][0])
+        print(followinglist[i])
+    return followinglist
+
+
+def get_followers(user_id):
+    query = """select follower.user_name from user follower, user_follow f WHERE ('%s' = f.following_id and follower.id = f.follower_id)
+            """ % (user_id)
+    followers = execute_sql(query, 1)
+    print("followers of user : ", user_id, "\n")
+    followerlist = []
+    for i in range(len(followers)):
+        followerlist.append(followers[i][0])
+        print(followerlist[i])
+    return followerlist
 
 
 def timeline_message(user_id):
@@ -715,3 +732,4 @@ def did_u_mean_user(searchq,treshold):
 #search_song("cry")
 #timeline_message(10)
 #print(levenshtein_distance("blknt", "bilkent"))
+get_followings(104)
