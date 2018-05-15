@@ -839,7 +839,9 @@ def get_users_playlists(userid):
 def get_following_playlist(userid):
     playlists = []
     query = """
-            select * from following_playlist fp WHERE fp.
+          SELECT pl.id, pl.title
+          FROM activity a, user u, playlist pl
+          WHERE(a.user_id = u.id AND a.action_type = '%s' AND a.entity_type = '%s')
             """
     plists = execute_sql(query,1)
     for i in range(len(plists)):
@@ -848,7 +850,6 @@ def get_following_playlist(userid):
         pl = Playlist(plists[i][0], plists[i][1], None, None)
         playlists.append(pl)
     return playlists
-    return
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
@@ -866,4 +867,4 @@ def get_following_playlist(userid):
 # timeline_message(10)
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
-get_users_playlists(10)
+get_following_playlist(10)
