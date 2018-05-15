@@ -231,9 +231,15 @@ def remove_event(id):  # tested
 
 
 def user_attend_to_event(user_id, event_id):  # tested
+    sql = "SELECT * FROM participation_user WHERE user_id = '%s' and event_id = '%s'" \
+          % (user_id, event_id)
+    ret = execute_sql(sql)
+    if ret != None:
+        return "You Already Participated This Event!"
+
     sql = "INSERT INTO participation_user VALUE ('%s', '%s')" % (user_id, event_id)
     execute_sql(sql)
-    return
+    return "You Successfully Participated This Event!"
 
 
 def artist_attend_to_event(artist_id, event_id):
