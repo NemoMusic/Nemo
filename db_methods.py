@@ -391,15 +391,33 @@ def create_activity(date, ent_type, act_type, user_id, entity_id):
 
 
 # ali bulut
-def share_song():
+def share_song(user_id, entity_id, share_comment):
+    sql = "INSERT INTO activity VALUE (DEFAULT '%s', '%s', '%s', '%s', '%s' )" \
+          % (dt.datetime.now().date(), song, share, user_id, entity_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO share VALUE ('%s', '%s')" % (id, share_comment)
+    execute_sql(sql)
     return
 
 
-def share_playlist():
+def share_playlist(user_id, entity_id, share_comment):
+    sql = "INSERT INTO activity VALUE (DEFAULT '%s', '%s', '%s', '%s', '%s' )" \
+          % (dt.datetime.now().date(), playlist, share, user_id, entity_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO share VALUE ('%s', '%s')" % (id, share_comment)
+    execute_sql(sql)
     return
 
 
-def share_album():
+def share_album(user_id, entity_id, share_comment):
+    sql = "INSERT INTO activity VALUE (DEFAULT '%s', '%s', '%s', '%s', '%s' )" \
+          % (dt.datetime.now().date(), album, share, user_id, entity_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO share VALUE ('%s', '%s')" % (id, share_comment)
+    execute_sql(sql)
     return
 
 
