@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html>
 {% include "top.html" %}
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../static/theme.css" type="text/css">
-  <link rel="stylesheet" href="../static/bottom.css" type="text/css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css">
-  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
-  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
-</head>
-
-<body>
+  <link rel="stylesheet" type="text/css" href="../static/jquery-ui-1.12.1.custom/jquery-ui.theme.css">
   <div style="overflow-y: scroll; height: 500px; background-color: #1a1a1a;">
   <script>
     $(document).ready(function () {
@@ -37,8 +21,8 @@
         <th>Delete</th>
       </tr>
     </thead>
-      {% for song in songs %}
     <tbody>
+      {% for song in songs %}
       <tr>
         <td>
           <img src="../static/play.png" alt="Play" height="24" width="24"> </td>
@@ -50,10 +34,8 @@
         <td>
           <img src="../static/delete.png" alt="Delete" height="24" width="24"> </td>
       </tr>
-    </tbody>
       {% endfor %}
+    </tbody>
   </table>
   </div>
-</body>
 {% include "bottom.html" %}
-</html>

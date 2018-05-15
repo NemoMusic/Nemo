@@ -49,6 +49,7 @@ def signIn():
     email = request.form["email"]
     password = request.form["password"]
     gender = request.form["gender"]
+    print(gender);
     user_type = request.form["user_type"]
     signIn = db_methods.create_user(email, name, lastname, gender, username, password, 0, dt.datetime(2000, 2, 3))
     if signIn:
