@@ -849,9 +849,9 @@ def get_users_playlists(userid):
     query = """
             select p.id, p.title from playlist p WHERE (p.user_id = '%s')
             """ % (userid)
-    plists = execute_sql(query,1)
-    for i in range(len(plists)):
-        pl = Playlist(plists[i][0], plists[i][1], None, None)
+    plists = execute_sql(query, 1)
+    for it in plists:
+        pl = Playlist(it[0], it[1], None, None)
         playlists.append(pl)
     return playlists
 
@@ -859,18 +859,18 @@ def get_users_playlists(userid):
 def get_following_playlist(userid):
     playlists = []
     query = """
-          SELECT pl.id, pl.title
-          FROM activity a, user u, playlist pl
-          WHERE(a.user_id = u.id AND a.action_type = '%s' AND a.entity_type = '%s')
-            """
-    plists = execute_sql(query,1)
-    for i in range(len(plists)):
-        print(plists[i][0])
-        print(plists[i][1])
-        pl = Playlist(plists[i][0], plists[i][1], None, None)
+          SELECT a.entity_id
+          FROM activity a join user u on (a.user_id = u.id) 
+          WHERE a.action_type = '%s' and a.entity_type = '%s' and u.id = '%s'
+            """ % (follow, playlist, userid)
+    plists = execute_sql(query, 1)
+    for it in plists:
+        sql = "SELECT * FROM playlist p WHERE p.id = '%s'" % it[0]
+        ret = execute_sql(sql)
+        pl = Playlist(ret[0], ret[1], ret[2], ret[3])
         playlists.append(pl)
+
     return playlists
-    return
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
