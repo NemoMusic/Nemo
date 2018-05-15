@@ -120,6 +120,12 @@ def search():
     else:
         return redirect('/')
 
+@app.route('/playlists')
+def playlists():
+    if authcheck():
+        return render_template('playlists.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+    else:
+        return redirect('/')
 
 @app.route('/logout')
 def logout():

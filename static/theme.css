@@ -42,6 +42,20 @@
 *::after {
   box-sizing: border-box; }
 
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
