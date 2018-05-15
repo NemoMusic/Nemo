@@ -695,6 +695,23 @@ def timeline_message(user_id):
         print(logarray[i])
 
 
+def get_attended_events(user_id):
+    sql = "SELECT event_id FROM participation_user WHERE user_id = '%s'" % user_id
+    attended_events = execute_sql(sql, 1)
+
+    res = []
+
+    if attended_events == None:
+        return res
+
+    for event_it in attended_events:
+        sql = "SELECT * FROM event WHERE id = '%s'" % event_it[0]
+        ret = execute_sql(sql)
+        e = Event(ret[0], ret[1], ret[2], ret[3], ret[4])
+        res.append(e)
+
+    return res
+
 
 def search_user(username):
     query = "select * from user u where (u.user_name like '%" +username + "%')"
