@@ -24,53 +24,20 @@
     <br>
   </div>
 
-  <div class="col-md-2" style="width: 100%">
-    <h1>Playlists</h1>
-    <ul id="eventsList" class="list-group" style="width: 50%; max-height: 300px;
-    margin-bottom: 10px;
-    overflow:scroll;
-    -webkit-overflow-scrolling: touch;
-    background-color: #1a1a1a;
-    border-top: 1px solid #0091b5;
-    border-left-color: #fff;
-    border-right-color: #fff;">
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 1</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 2</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 3</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 4</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 5</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 6</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 7</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 8</a>
-                </li>
-                <li class="list-group-item">
-                  <a href="https://www.goal.com">Playlist 9</a>
-                </li>
-              </ul>
-  </div>
-  <div class="col-md-8" style="width: 100%;">
-      <h2>Chill and Relax</h2>
+  <div class="col-md-10" style="width: 100%;">
+  	<div class="row">
+  		<h2>Chill and Relax</h2>
         <script>
           $(document).ready(function () {
 
               $('#example').DataTable();
           });
         </script>
+        <br>
+        <button type="button">Share</button>
+
+  	</div>
+
         <table id="example" class="display" style="width:100%">
           <thead>
             <tr>
@@ -99,6 +66,7 @@
           </tbody>
             {% endfor %}
         </table>
+
   </div>
     <div class="col-md-1">
     <br>
