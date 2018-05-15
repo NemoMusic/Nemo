@@ -245,7 +245,11 @@ def follow_user(self_user_id, to_follow_id):
     return
 
 
-def unfollow_user():
+def unfollow_user(self_user_id, to_unfollow_id):
+    query = """
+            delete from user_follow WHERE (user_follow.follower_id = '%s' AND user_follow.following_id = '%s')
+            """ % (self_user_id,to_unfollow_id)
+    execute_sql(query)
     return
 
 
@@ -627,11 +631,13 @@ def timeline_message(user_id):
             else:
                 sql = "SELECT title FROM album WHERE id = '%s'" % entity_id
             rated_item = execute_sql(sql)
-            return '<a href="http://link">'+username+'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+username+'">'+rated_item+' as'+rate+' star</a>'
+            log = '<a href="http://link">'+username+'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+username+'">'+rated_item+' as'+rate+' star</a>'
+            logarray.append(log)
         elif act_type == follow:
             sql = "SELECT name FROM user WHERE id = '%s'" % entity_id
             username2 = execute_sql(sql)
-            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has fallowed </p><a href="/user?username=' + username2 + '">' + username2 + '</a>'
+            log = '<a href="http://link">' + username + '</a><p style="text-align: right;"> has fallowed </p><a href="/user?username=' + username2 + '">' + username2 + '</a>'
+            logarray.append(log)
         elif act_type == share:
             if entitytype == song:
                 sql = "SELECT title FROM song WHERE id = '%s'" % entity_id
@@ -640,11 +646,14 @@ def timeline_message(user_id):
             else:
                 sql = "SELECT title FROM playlist WHERE id = '%s'" % entity_id
             shared_item = execute_sql(sql)
-            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> has shared </p><a href="/user?username=' + shared_item + '"></a>'
+            log = '<a href="http://link">' + username + '</a><p style="text-align: right;"> has shared </p><a href="/user?username=' + shared_item + '"></a>'
+            logarray.append(log)
         elif act_type == comment_a:
             sql = "SELECT text FROM comment WHERE activity_id = '%s'" % entity_id
             comment = execute_sql(sql)
-            return '<a href="http://link">' + username + '</a><p style="text-align: right;"> shared comment: </p><a href="/user?username=' + comment + '"></a>'
+            log = '<a href="http://link">' + username + '</a><p style="text-align: right;"> shared comment: </p><a href="/user?username=' + comment + '"></a>'
+            logarray.append(log)
+        print(logarray[i])
 
 
 
