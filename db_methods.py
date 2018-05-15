@@ -56,7 +56,7 @@ def get_User(id):
     query="select * from user where id = '%id'"%id
     user = execute_sql(query);
     print(user)
-    return User(user_id=user[0],username=user[5],name=user[2],lastname=user[3],wallet=user[6])
+    return User(user_id=user[0],username=user[5],name=user[2],lastname=user[3],wallet=user[7])
 '''
     creates user,
     :return id if successful
