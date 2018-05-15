@@ -269,24 +269,36 @@ def rate_song(user_id, song_id, value):
     print("executed")
 
 
-def rate_playlist():
-    return
+def rate_playlist(user_id, playlist_id, value):
+    act_id = create_activity(dt.datetime.now(), playlist, rate, user_id, playlist_id)
+    print("in rate playlist act id = ", act_id)
+    query = """
+            insert into rate
+            VALUES ('%s' ,'%s')
+            """ % (act_id, value)
+    execute_sql(query)
+    print("executed")
 
 
-def rate_album():
-    return
+def rate_album(user_id, album_id,value):
+    act_id = create_activity(dt.datetime.now(), playlist, rate, user_id, album_id)
+    print("in rate album act id = ", act_id)
+    query = """
+            insert into rate
+            VALUES ('%s' ,'%s')
+            """ % (act_id, value)
+    execute_sql(query)
+    print("executed")
+#def create_genre(name):
+#   sql = "INSERT INTO genre VALUE ('%s')" % name
+#   execute_sql(sql)
+#   return
 
 
-def create_genre(name):
-    sql = "INSERT INTO genre VALUE ('%s')" % name
-    execute_sql(sql)
-    return
-
-
-def remove_genre(name):
-    sql = "DELETE FROM genre WHERE name = '%s'" % name
-    execute_sql(sql)
-    return
+#def remove_genre(name):
+#   sql = "DELETE FROM genre WHERE name = '%s'" % name
+#    execute_sql(sql)
+#    return
 
 
 def create_album(title, release_date, price):  # tested
@@ -578,7 +590,7 @@ def timeline_message(user_id):
             LEFT OUTER JOIN rate on (a.id = rate.activity_id) 
             LEFT OUTER JOIN share ON (a.id = share.activity_id)
             LEFT OUTER JOIN comment ON (a.id = comment.activity_id)
-            WHERE ('%s' = uf.follower_id and following.id = uf.following_id and a.user_id = following.id)
+            WHERE ('%s' = uf.follower_id and following.id = uf.following_id and a.user_id = following.id) ORDER BY a.date DESC
             """ %(follow,user_id,share,comment_a,rate,user_id)
 
     message = execute_sql(query,1)
@@ -616,7 +628,7 @@ def timeline_message(user_id):
             sql = "SELECT text FROM comment WHERE activity_id = '%s'" % entity_id
             comment = execute_sql(sql)
             return '<a href="http://link">' + username + '</a><p style="text-align: right;"> shared comment: </p><a href="/user?username=' + comment + '"></a>'
-    return logarray
+
 
 
 def search_user(username):
@@ -667,12 +679,16 @@ def search_events(eventtitle):
         events.append(Event(event_id= events_tuple[i][0], name= events_tuple[i][1], date=events_tuple[i][2],
                             location=events_tuple[i][3], about=events_tuple[i][4]))
     return events
+
+
 def levenshtein_distance(x,y):
     if not len(x):
         return len(y)
     if not len(y):
         return len(x)
     return min(levenshtein_distance(x[1:], y[1:]) + (x[0] != y[0]), levenshtein_distance(x[1:], y) + 1, levenshtein_distance(x, y[1:]) + 1)
+
+
 def did_u_mean_user(searchq,treshold):
     user_query = """
             select user.user_name from user
