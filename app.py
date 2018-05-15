@@ -128,10 +128,18 @@ def playlists():
     else:
         return redirect('/')
 
+@app.route('/events')
+def events():
+    if authcheck():
+        return render_template('events.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+    else:
+        return redirect('/')
+
 @app.route('/logout')
 def logout():
     session.pop('user_id')
     return redirect('/')
+
 
 @app.route('/createPlaylist')
 def createPlaylistPage():
