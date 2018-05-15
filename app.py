@@ -65,6 +65,13 @@ def mySons():
     else:
         return redirect('/')
 
+@app.route('/profile')
+def profile():
+    if authcheck():
+        return render_template('profile.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+    else:
+        return redirect('/')
+
 @app.route('/market')
 def market():
     if authcheck():
