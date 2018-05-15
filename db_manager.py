@@ -1,5 +1,5 @@
 import pymysql
-
+from db_methods import follow,playlist
 connection = None
 
 connection = pymysql.connect(host='nemo.cnj8noexhne9.eu-west-1.rds.amazonaws.com',
@@ -217,6 +217,18 @@ create_view_album_rate = """create view album_rate as
             WHERE ac.action_type = 'RATE' and ac.entity_type = 'ALBUM' and r.activity_id = a.id and ac.entity_id = a.id
             GROUP BY a.id"""
 
+
+create_view_following_playlists = """create view following_playlist as
+          SELECT pl.*
+          FROM activity a, user u, playlist pl
+          WHERE(a.user_id = u.id AND a.action_type = '%s' AND a.entity_type = '%s')
+""" % (follow,playlist)
+
+
+create_user_index ="""create index uname on user(user_name)"""
+
+#execute_sql(create_view_following_playlists)
+#execute_sql(create_user_index)
 # execute_sql(create_view_album_rate)
 # execute_sql(create_view_song_rate)
 # execute_sql(create_user_table)

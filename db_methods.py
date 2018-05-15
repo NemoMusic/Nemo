@@ -782,6 +782,32 @@ def did_u_mean_user(searchq,treshold):
             return "Did you mean " + others[i][5]
 
 
+def get_users_playlists(userid):
+    playlists = []
+    query = """
+            select p.id, p.title from playlist p WHERE (p.user_id = '%s')
+            """ % (userid)
+    plists = execute_sql(query,1)
+    for i in range(len(plists)):
+        pl = Playlist(plists[i][0], plists[i][1], None, None)
+        playlists.append(pl)
+    return playlists
+
+
+def get_following_playlist(userid):
+    playlists = []
+    query = """
+            select * from following_playlist fp WHERE fp.
+            """
+    plists = execute_sql(query,1)
+    for i in range(len(plists)):
+        print(plists[i][0])
+        print(plists[i][1])
+        pl = Playlist(plists[i][0], plists[i][1], None, None)
+        playlists.append(pl)
+    return playlists
+    return
+
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
@@ -798,3 +824,4 @@ def did_u_mean_user(searchq,treshold):
 # timeline_message(10)
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
+get_users_playlists(10)
