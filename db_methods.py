@@ -37,6 +37,7 @@ song = "SONG"
 album = "ALBUM"
 user = "USER"
 comment_e = "COMME"
+event = "EVENT"
 playlist = "PLIST"
 # ACTIVITY TYPES
 follow = "FOLLO"
@@ -253,11 +254,19 @@ def unfollow_user(self_user_id, to_unfollow_id):
     return
 
 
-def follow_playlist():
+def follow_playlist(self_user_id, playlist_id):
+    query = """
+            insert into activity VALUES (DEFAULT, '%s','%s', '%s', '%s', '%s')
+            """ % (dt.datetime.now().date(), playlist, follow, self_user_id, playlist_id)
+    execute_sql(query)
     return
 
 
-def unfollow_playlist():
+def unfollow_playlist(activity_id):
+    query = """
+            delete from activity WHERE id = '%s'
+            """ % activity_id
+    execute_sql(query)
     return
 
 
@@ -438,23 +447,53 @@ def share_album(user_id, entity_id, share_comment):
 
 
 # omer faruk karakaya
-def comment_on_song():
+def comment_on_song( user_id, song_id, comment_text ):
+    sql = "INSERT INTO activity VALUE (DEFAULT, '%s', '%s', '%s', '%s', '%s')" \
+          % (dt.datetime.now().date(), comment_e, song, user_id, song_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO comment VALUE ('%s', '%s')" % (id, comment_text)
+    execute_sql(sql)
     return
 
 
-def comment_on_playlist():
+def comment_on_playlist( user_id, song_id, comment_text ):
+    sql = "INSERT INTO activity VALUE (DEFAULT, '%s', '%s', '%s', '%s', '%s')" \
+          % (dt.datetime.now().date(), playlist, comment_a, user_id, song_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO comment VALUE ('%s', '%s')" % (id, comment_text)
+    execute_sql(sql)
     return
 
 
-def comment_on_album():
+def comment_on_album( user_id, song_id, comment_text ):
+    sql = "INSERT INTO activity VALUE (DEFAULT, '%s', '%s', '%s', '%s', '%s')" \
+          % (dt.datetime.now().date(), album, comment_a, user_id, song_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO comment VALUE ('%s', '%s')" % (id, comment_text)
+    execute_sql(sql)
     return
 
 
-def comment_on_event():
+def comment_on_event( user_id, song_id, comment_text ):
+    sql = "INSERT INTO activity VALUE (DEFAULT, '%s', '%s', '%s', '%s', '%s')" \
+          % (dt.datetime.now().date(), event,  comment_a, user_id, song_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO comment VALUE ('%s', '%s')" % (id, comment_text)
+    execute_sql(sql)
     return
 
 
-def reply_to_comment():
+def reply_to_comment( user_id, song_id, comment_text ):
+    sql = "INSERT INTO activity VALUE (DEFAULT, '%s', '%s', '%s', '%s', '%s')" \
+          % (dt.datetime.now().date(), comment_e, comment_a, user_id, song_id)
+    execute_sql(sql)
+    id = connection.cursor().lastrowid
+    sql = "INSERT INTO comment VALUE ('%s', '%s')" % (id, comment_text)
+    execute_sql(sql)
     return
 
 
