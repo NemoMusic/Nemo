@@ -719,6 +719,20 @@ def get_attended_events(user_id):
     return res
 
 
+def get_all_events():
+    sql = "SELECT id FROM event"
+    event_ids = execute_sql(sql,1)
+    res = []
+
+    for it in event_ids:
+        sql = "SELECT * FROM event WHERE id = '%s'" % it[0]
+        ret = execute_sql(sql)
+        e = Event(ret[0], ret[1], ret[2], ret[3], ret[4])
+        res.append(e)
+
+    return res
+
+
 def get_songs_of_playlist(playlist_id):
     sql = "SELECT song_id FROM playlist_song WHERE playlist_id = '%s'" % playlist_id
     playlist_songs = execute_sql(sql,1)
