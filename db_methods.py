@@ -50,7 +50,13 @@ comment_a = "COMME"
     Herkes kendi doldurmasi gereken methodu dolduracak
     edit: tamam pasam
 '''
-# musab erayman
+
+
+def get_User(id):
+    query="select * from user where id = '%id'"%id
+    user = execute_sql(query);
+    print(user)
+    return User(user_id=user[0],username=user[5],name=user[2],lastname=user[3],wallet=user[6])
 '''
     creates user,
     :return id if successful
@@ -850,6 +856,7 @@ def get_following_playlist(userid):
         pl = Playlist(plists[i][0], plists[i][1], None, None)
         playlists.append(pl)
     return playlists
+    return
 
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)

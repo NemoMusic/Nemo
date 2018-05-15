@@ -69,7 +69,11 @@ def mySons():
 @app.route('/profile')
 def profile():
     if authcheck():
-        return render_template('profile.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+        uid=int(session['user_id'])
+        print(db_methods.get_users_playlists(10)[0].title)
+        return render_template('profile.html', user=db_methods.get_User(uid),ply1s=db_methods.get_users_playlists(uid),
+                               ply2s=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
+                               followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))
     else:
         return redirect('/')
 
