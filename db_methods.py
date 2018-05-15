@@ -713,6 +713,48 @@ def get_attended_events(user_id):
     return res
 
 
+def get_songs_of_playlist(playlist_id):
+    sql = "SELECT song_id FROM playlist_song WHERE playlist_id = '%s'" % playlist_id
+    playlist_songs = execute_sql(sql,1)
+
+    res = []
+    if playlist_songs == None:
+        return res
+
+    for sng_it in playlist_songs:
+        sql = "SELECT s.*, u.name, al.title, sr.rate  " \
+              "FROM song s join artist_song a join user u join album al join song_rate sr " \
+              "WHERE s.id = '%s' and a.song_id = s.id and al.id = s.album_id and a.user_id=u.id and sr.song_id = s.id" % \
+              sng_it[0]
+        sng = execute_sql(sql)
+
+        s = Song(sng[0], sng[1], sng[2], sng[3], sng[4], sng[5], sng[6], sng[7], sng[8], sng[9], sng[10])
+        res.append(s)
+
+    return res
+
+
+def get_comments_of_playlist(playlist_id):
+    sql = "SELECT id FROM activity WHERE entity_type = '%s' and action_type = '%s' and entity_id = '%s' " \
+        % (playlist, comment_a, playlist_id)
+    comments_playlist = execute_sql(sql,1)
+
+    res = []
+
+    if comments_playlist == None:
+        return res
+
+    for act_id in comments_playlist:
+        sql = "SELECT a.id, a.date, a.entity_type, a.action_type, c.text  " \
+              "FROM activity a join comment c on (c.activity_id = a.id) " \
+              "WHERE a.id = '%s'" % act_id[0]
+        ret = execute_sql(sql)
+        c = Comment(ret[0], ret[1], ret[2], ret[3], ret[4], None, None)
+        res.append(c)
+
+    return res
+
+
 def search_user(username):
     query = "select * from user u where (u.user_name like '%" +username + "%')"
     users_tuple = execute_sql(query,1)
@@ -782,6 +824,32 @@ def did_u_mean_user(searchq,treshold):
             return "Did you mean " + others[i][5]
 
 
+def get_users_playlists(userid):
+    playlists = []
+    query = """
+            select p.id, p.title from playlist p WHERE (p.user_id = '%s')
+            """ % (userid)
+    plists = execute_sql(query,1)
+    for i in range(len(plists)):
+        pl = Playlist(plists[i][0], plists[i][1], None, None)
+        playlists.append(pl)
+    return playlists
+
+
+def get_following_playlist(userid):
+    playlists = []
+    query = """
+            select * from following_playlist fp WHERE fp.
+            """
+    plists = execute_sql(query,1)
+    for i in range(len(plists)):
+        print(plists[i][0])
+        print(plists[i][1])
+        pl = Playlist(plists[i][0], plists[i][1], None, None)
+        playlists.append(pl)
+    return playlists
+    return
+
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
@@ -798,3 +866,4 @@ def did_u_mean_user(searchq,treshold):
 # timeline_message(10)
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
+get_users_playlists(10)
