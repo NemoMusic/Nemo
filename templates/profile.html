@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
 {% include "top.html" %}
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../static/profile.css" type="text/css"> 
-  <link rel="stylesheet" href="../static/theme.css" type="text/css"></head>
-<body>
   <div class="py-5 bg-primary">
     <div class="container">
       <div class="row">
@@ -34,23 +26,23 @@
           <div class="row">
             <div class="col-md-6">
               <h6> Created Playlist</h6>
-              <ul class="list-group">
-                (% for ply in plya %}
+	      		<ul class="list-group">
+	            {% for playlist in created %}
                   <li class="list-group-item">
-                    <a href="/playlist?id={{ply.p1aylist_id}}">{{ply.title}}</a>
+                    <a href="/playlists">{{playlist.title}}</a>
                   </li>
-                (% endfor %)
-              </ul>
+                  {% endfor %}
+	      		</ul>
             </div>
             <div class="col-md-6">
               <h6> Following Playlist</h6>
-              <ul class="list-group">
-               (% for ply in plyb %}
-                  <li class="list-group-item">
-                    <a href="/playlist?id={{ply.p1aylist_id}}">{{ply.title}}</a>
-                  </li>
-               (% endfor %)
-              </ul>
+              		<ul class="list-group">
+	                {% for play in followings %}
+	                  <li class="list-group-item">
+	                    <a href="/playlists">{{play.title}}</a>
+	                  </li>
+	                  {% endfor %}
+			  		</ul>
             </div>
           </div>
         </div>
@@ -71,7 +63,7 @@
             <div class="col-md-6">
               <h6> Followers</h6>
               <ul class="list-group">
-                {% for following in followers %}
+                {% for follower in followers %}
                   <li class="list-group-item">
                     <a href="/otherprofile?username={{follower}}">{{follower}}</a>
                   </li>
@@ -104,6 +96,4 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
 {% include "bottom.html" %}
-</html>

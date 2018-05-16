@@ -70,9 +70,11 @@ def mySons():
 def profile():
     if authcheck():
         uid=int(session['user_id'])
-        print(db_methods.get_users_playlists(10)[0].title)
-        return render_template('profile.html', user=db_methods.get_User(uid),plya=db_methods.get_users_playlists(uid),
-                               plyb=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
+        print(db_methods.get_following_playlist(uid))
+        print("****")
+        print(db_methods.get_users_playlists(uid))
+        return render_template('profile.html', user=db_methods.get_User(uid),created=db_methods.get_users_playlists(uid),
+                               followed=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
                                followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))
     else:
         return redirect('/')
