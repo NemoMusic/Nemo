@@ -70,7 +70,7 @@ def profile():
         uid=int(session['user_id'])
         return render_template('profile.html', user=db_methods.get_User(uid),created=db_methods.get_users_playlists(uid),
                                followed=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
-                               followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))
+                               followings=db_methods.get_followings(uid), events=db_methods.get_attended_events(uid))
     else:
         return redirect('/')
 
