@@ -912,31 +912,3 @@ def optimizeUser():
 # get_following_playlist(10)
 # optimizeUser()
 
-
-'''
-follow_user(10, 15)
-follow_user(10, 13)
-follow_user(10, 1)
-follow_user(10, 2)
-follow_user(10, 3)
-follow_user(10, 4)
-follow_user(10, 25)
-follow_user(10, 43)
-follow_user(10, 51)
-follow_user(10, 62)
-follow_user(10, 33)
-follow_user(10, 14)
-
-follow_user(5, 10)
-follow_user(13, 10)
-follow_user(44, 10)
-follow_user(2, 10)
-follow_user(3, 10)
-follow_user(33, 10)
-follow_user(45, 10)
-follow_user(73, 10)
-follow_user(24, 10)
-follow_user(12, 10)
-follow_user(63, 10)
-follow_user(83, 10)
-'''
