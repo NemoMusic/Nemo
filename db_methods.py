@@ -892,6 +892,7 @@ def optimizeUser():
                 """
     execute_sql(query)
     return
+
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
@@ -909,4 +910,4 @@ def optimizeUser():
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
 # get_following_playlist(10)
-optimizeUser()
+# optimizeUser()
