@@ -71,8 +71,8 @@ def profile():
     if authcheck():
         uid=int(session['user_id'])
         print(db_methods.get_users_playlists(10)[0].title)
-        return render_template('profile.html', user=db_methods.get_User(uid),ply1s=db_methods.get_users_playlists(uid),
-                               ply2s=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
+        return render_template('profile.html', user=db_methods.get_User(uid),plya=db_methods.get_users_playlists(uid),
+                               plyb=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
                                followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))
     else:
         return redirect('/')
@@ -109,7 +109,8 @@ def buysong():
 @app.route('/timeline')
 def timeline():
     if authcheck():
-        return render_template('timeline.html')
+        uid = session['user_id']
+        return render_template('timeline.html',activities=db_methods.timeline_message(uid))
     else:
         return redirect('/')
 
@@ -135,7 +136,7 @@ def playlists():
 @app.route('/events')
 def events():
     if authcheck():
-        return render_template('events.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+        return render_template('events.html', events=db_methods.get_all_events())
     else:
         return redirect('/')
 
@@ -144,6 +145,13 @@ def logout():
     session.pop('user_id')
     return redirect('/')
 
+
+@app.route('/attend')
+def attend():
+    id = int(request.args.get('id'))
+    uid = int(session['user_id'])
+    message = db_methods.user_attend_to_event(uid,id)
+    return redirect('/events?message=' + message)
 
 @app.route('/createPlaylist')
 def createPlaylistPage():

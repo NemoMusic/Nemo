@@ -683,7 +683,7 @@ def timeline_message(user_id):
                     sql = "SELECT title FROM album WHERE id = '%s'" % entity_id
                 rated_item = execute_sql(sql)
                 rated_item = rated_item[0]
-                log = '<a href="http://link">'+ username +'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+ username +'">'+ rated_item + ' as ' + act_content + ' star</a>' , i
+                log = '<a href="http://link">'+ username +'</a><p style="text-align: right;"> has rated </p><a href="/user?username='+ username +'">'+ rated_item + ' as ' + act_content + ' star</a>'
                 logarray.append(log)
             elif act_type == follow:
                 sql = "SELECT name FROM user WHERE id = '%s'" % entity_id
@@ -897,7 +897,7 @@ def get_following_playlist(userid):
 # rate_song(108,4,5)
 # purchase_album(86, 2)
 # search_song("cry")
-timeline_message(10)
+#timeline_message(10)
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
 # get_following_playlist(10)

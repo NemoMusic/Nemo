@@ -35,7 +35,7 @@
             <div class="col-md-6">
               <h6> Created Playlist</h6>
               <ul class="list-group">
-                (% for ply in ply2s %}
+                (% for ply in plya %}
                   <li class="list-group-item">
                     <a href="/playlist?id={{ply.p1aylist_id}}">{{ply.title}}</a>
                   </li>
@@ -45,7 +45,7 @@
             <div class="col-md-6">
               <h6> Following Playlist</h6>
               <ul class="list-group">
-               (% for ply in ply1s %}
+               (% for ply in plyb %}
                   <li class="list-group-item">
                     <a href="/playlist?id={{ply.p1aylist_id}}">{{ply.title}}</a>
                   </li>
@@ -89,7 +89,7 @@
                   <ul class="list-group w-100 mx-1" id="eventsList" style="background-color: rgb(26, 26, 26);" height="100px">
                     {% for event in events %}
                     <li class="list-group-item">
-                      <a href="/otherprofile?event={{event}}">{{event}}</a>
+                      <a href="/otherprofile?events">{{event.name}}</a>
                     </li>
                     {% endfor %}
                   </ul>
