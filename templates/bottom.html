@@ -2,7 +2,7 @@
     <hr>
     <div class="container">
       <div class="row">
-        <div class="ui-grid-col-3" style="position: fixed; left: 0px;"> 
+        <div class="ui-grid-col-3">
           <div class="row">
             <div class="col-md-5">
               <img src="../static/kayahan.jpg" alt="ImageMusic" style="width: 70px; height: 70px;" class="my-2"> </div>
@@ -29,7 +29,7 @@
                         waveColor: 'orange',
                         progressColor: 'gray',
                         });
-                        wavesurfer.load('../static/mp3/06 Back In Black.mp3');
+                        wavesurfer.load('../static/mp3/kayahan.mp3');
                         wavesurfer.on('ready', function () {
                         wavesurfer.play();
                          });
@@ -40,7 +40,7 @@
           <div class="row d-flex justify-content-center">
             <div class="rating">
               <span>
-                <input type="radio" name="rating" id="str5" value="5">
+              <input type="radio" name="rating" id="str5" value="5">
                 <label for="str5"></label>
               </span>
               <span>
@@ -66,15 +66,34 @@
               <p id="ratingText">Rating</p>
             </div>
           </div>
+         <script type="text/javascript">
+		    $(document).ready(function () {
+		        // Check Radio-box
+		        $(".rating input:radio").attr("checked", false);
+		 
+		        $('.rating input').click(function () {
+		            $(".rating span").removeClass('checked');
+		            $(this).parent().addClass('checked');
+		        });
+		 
+		        $('input:radio').change(
+		            function () {
+		                var userRating = this.value;
+		                alert("You give the rating " + userRating + "/5");
+		            });
+		    });
+		</script>
         </div>
       </div>
     </div>
     <hr>
   </div>
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"></script>
+ 
 </body>
 </html>
