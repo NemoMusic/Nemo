@@ -35,7 +35,6 @@ def loginSignin():
     login = db_methods.login_authentication(username, password)
     if login:
         session['user_id'] = login
-        print(session['user_id'])
         return render_template('my_songs.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
     else:
         return render_template('login.html', message1="Email or Password Incorrect")
@@ -49,7 +48,6 @@ def signIn():
     email = request.form["email"]
     password = request.form["password"]
     gender = request.form["gender"]
-    print(gender);
     user_type = request.form["user_type"]
     signIn = db_methods.create_user(email, name, lastname, gender, username, password, 0, dt.datetime(2000, 2, 3))
     if signIn:
@@ -70,9 +68,6 @@ def mySons():
 def profile():
     if authcheck():
         uid=int(session['user_id'])
-        print(db_methods.get_following_playlist(uid))
-        print("****")
-        print(db_methods.get_users_playlists(uid))
         return render_template('profile.html', user=db_methods.get_User(uid),created=db_methods.get_users_playlists(uid),
                                followed=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
                                followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))

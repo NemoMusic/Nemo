@@ -884,6 +884,14 @@ def get_following_playlist(userid):
 
     return playlists
 
+def optimizeUser():
+    query = """
+              UPDATE user 
+              SET email = 'dba@lookman.com', name = 'Kerem', last_name = 'Ayöz', user_name = 'kerem_ayoz', password = '123', wallet = 1905  
+              WHERE id = 10
+                """
+    execute_sql(query)
+    return
 #create_user('basi3','isim','soyisim','male','piley23',"password",'3',dt.datetime(2000,2,3))
 # remove_user(1)
 
@@ -901,3 +909,4 @@ def get_following_playlist(userid):
 # print(levenshtein_distance("blknt", "bilkent"))
 # get_followings(104)
 # get_following_playlist(10)
+optimizeUser()
