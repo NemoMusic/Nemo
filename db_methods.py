@@ -338,6 +338,11 @@ def remove_album(id):  # tested
     return
 
 
+def delete_user_song(user_id, song_id):
+    sql = "DELETE FROM user_song WHERE userid = '%s' and song_id = '%s'" % (user_id, song_id)
+    execute_sql(sql)
+    return
+
 # musab erayman
 def purchase_song(user_id, song_id):
     wallet = """
