@@ -67,18 +67,21 @@ def mySons():
 @app.route('/profile')
 def profile():
     if authcheck():
-        uid=int(session['user_id'])
-        return render_template('profile.html', user=db_methods.get_User(uid),created=db_methods.get_users_playlists(uid),
-                               followed=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
-                               followings=db_methods.get_followings(uid), events=db_methods.get_attended_events(uid))
-    else:
-        return redirect('/')
+        id = request.args.get('username')
+        if id is None:
+            uid=int(session['user_id'])
+            return render_template('profile.html', user=db_methods.get_User(uid),created=db_methods.get_users_playlists(uid),
+                                   followed=db_methods.get_following_playlist(uid),followers=db_methods.get_followers(uid),
+                                   followings=db_methods.get_following_playlist(uid), events=db_methods.get_attended_events(uid))
+        else:
+            uid = db_methods.get_userid_by_username(id)
+            return render_template('profile.html', user=db_methods.get_User(uid),
+                                   created=db_methods.get_users_playlists(uid),
+                                   followed=db_methods.get_following_playlist(uid),
+                                   followers=db_methods.get_followers(uid),
+                                   followings=db_methods.get_following_playlist(uid),
+                                   events=db_methods.get_attended_events(uid))
 
-@app.route('/market')
-def market():
-    if authcheck():
-        return render_template('market.html', songs=db_methods.get_songs_by_most_listened(),
-                           albums=db_methods.get_albums_by_most_listened())
     else:
         return redirect('/')
 
@@ -89,6 +92,13 @@ def buyalbum():
         album_id = request.args.get('id')
         message = db_methods.purchase_album(session['user_id'], album_id)
         return redirect('/market?message=' + message + '')
+        return redirect('/')
+
+@app.route('/market')
+def market():
+    if authcheck():
+        return render_template('market.html', songs=db_methods.get_songs_by_most_listened(),
+                               albums=db_methods.get_albums_by_most_listened())
     else:
         return redirect('/')
 
@@ -126,7 +136,8 @@ def search():
 @app.route('/playlists')
 def playlists():
     if authcheck():
-        return render_template('playlists.html', songs=db_methods.get_songs_of_users(int(session['user_id'])))
+        id = request.args.get('id')
+        return render_template('playlists.html', songs=db_methods.get_songs_of_playlist(id))
     else:
         return redirect('/')
 
@@ -136,6 +147,15 @@ def events():
         return render_template('events.html', events=db_methods.get_all_events())
     else:
         return redirect('/')
+
+
+@app.route('/delete')
+def delete():
+    id = request.args.get('id')
+    uid = int(session['user_id'])
+    db_methods.delete_user_song(uid,int(id))
+    return redirect('/mysongs')
+
 
 @app.route('/logout')
 def logout():

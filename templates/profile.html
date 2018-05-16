@@ -29,7 +29,7 @@
 	      		<ul class="list-group">
 	            {% for playlist in created %}
                   <li class="list-group-item">
-                    <a href="/playlists">{{playlist.title}}</a>
+                    <a href="/playlists?id={{playlist.playlist_id}}">{{playlist.title}}</a>
                   </li>
                   {% endfor %}
 	      		</ul>
@@ -39,7 +39,7 @@
               		<ul class="list-group">
 	                {% for play in followed %}
 	                  <li class="list-group-item">
-	                    <a href="/playlists">{{play.title}}</a>
+	                    <a href="/playlists?id={{play.playlist_id}}">{{play.title}}</a>
 	                  </li>
 	                  {% endfor %}
 			  		</ul>
@@ -65,7 +65,7 @@
               <ul class="list-group">
                 {% for follower in followers %}
                   <li class="list-group-item">
-                    <a href="/otherprofile?username={{follower}}">{{follower}}</a>
+                    <a href="/profile?username={{follower}}">{{follower}}</a>
                   </li>
                   {% endfor %}
               </ul>

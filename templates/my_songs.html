@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       {% for song in songs %}
-      <tr>
+      <>
         <td>
           <img src="../static/play.png" alt="Play" height="24" width="24"> </td>
         <td data-search="{{song.title}}">{{song.title}}</td>
@@ -32,7 +32,7 @@
         <td>{{song.genre}}</td>
         <td>{{song.number_of_listen}}</td>
         <td>
-          <img src="../static/delete.png" alt="Delete" height="24" width="24"> </td>
+            <a href="/delete?id={{song.song_id}}"><img src="../static/delete.png" alt="Delete" height="24"  width="24"></a> </td>
       </tr>
       {% endfor %}
     </tbody>
