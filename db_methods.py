@@ -739,6 +739,7 @@ def get_all_events():
     for it in event_ids:
         sql = "SELECT * FROM event WHERE id = '%s'" % it[0]
         ret = execute_sql(sql)
+        print(ret[0], ret[1], ret[2], ret[3], ret[4])
         e = Event(ret[0], ret[1], ret[2], ret[3], ret[4])
         res.append(e)
 
@@ -883,6 +884,13 @@ def get_following_playlist(userid):
         playlists.append(pl)
 
     return playlists
+
+
+def get_userid_by_username(username):
+    sql = "SELECT id FROM user WHERE user_name = '%s'" % username
+    u = execute_sql(sql)
+    print(u[0])
+    return u[0]
 
 def optimizeUser():
     query = """
